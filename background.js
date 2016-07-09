@@ -25,6 +25,7 @@ const devToolsListener = function(message, sender, sendResponse) {
     default: {
       return null;
     }
+  }
 }
 
 chrome.runtime.onMessage.addListener(devToolsListener);
