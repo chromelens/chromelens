@@ -17,13 +17,21 @@
 //   });
 // }
 
+// Utilities
+function log(s) {
+  const string = JSON.stringify(s);
+  chrome.devtools.inspectedWindow.eval('console.log(' + string + ')')
+};
+
 function createPanel() {
   chrome.devtools.panels.create('ChromeLens', '', 'panel.html', function(panel) {
+    log(Date.now())
+    log(chrome.devtools)
     panel.onShown.addListener(function(window) {
-      console.log(window);
+      log('window')
     });
     panel.onHidden.addListener(function() {
-      console.log('hidden');
+      log('hide')
     });
   })
 }
