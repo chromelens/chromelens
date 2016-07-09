@@ -35,14 +35,25 @@ const addEventListeners = () => {
 
   const stickyMouse = document.getElementById('stickymouseCbox');
   stickyMouse.onchange = function(){
-    log("Done");
     if(this.checked)
     {
-      //Enable sticky mouse
+      chrome.runtime.sendMessage({
+        type: messageType.EXECUTE_SCRIPT,
+        data: {
+          tabId: chrome.devtools.inspectedWindow.tabId,
+          scriptToInject: "stickymouse/magnify.js"
+        }
+      });
     }
     else
     {
-      //disable sticky mouse
+      chrome.runtime.sendMessage({
+        type: messageType.EXECUTE_SCRIPT,
+        data: {
+          tabId: chrome.devtools.inspectedWindow.tabId,
+          scriptToInject: "stickymouse/normalize.js"
+        }
+      });
     }
   };
 }
