@@ -11,10 +11,11 @@ function addEventListeners() {
   const lensSelector = document.getElementById('lensSelector');
   lensSelector.onchange = function(){
     log(this.options[this.selectedIndex].value);
+    const lens = this.options[this.selectedIndex].value;
     // Relay the tab ID to the background page
     chrome.runtime.sendMessage({
       tabId: chrome.devtools.inspectedWindow.tabId,
-      scriptToInject: "content_script.js"
+      scriptToInject: "lenses/" + lens + ".js"
     });
   };
 }
