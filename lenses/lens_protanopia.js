@@ -9,5 +9,5 @@ iDiv.innerHTML = '<svg id="colorFilterSVG" version="1.1" xmlns="http://www.w3.or
   '</svg>';
 
 document.body.appendChild(iDiv);
-document.body.style.filter = "url(#protanomaly)";
-document.body.style.webkitFilter = "url(#protanomaly)";
+document.body.style.filter = "url(#protanopia)";
+document.body.style.webkitFilter = "url(#protanopia)";
