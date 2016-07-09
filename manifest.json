@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "Chrome Lens",
+  "description": "Simulate visual impairment",
+  "version": "0.0.1",
+  "minimum_chrome_version": "43",
+  "devtools_page": "main.html",
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [ "main.html", "panel.html", "build/backend.js"],
+
+  "background": {
+    "scripts": [ ]
+  },
+
+  "permissions": [
+    "file:///*",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
