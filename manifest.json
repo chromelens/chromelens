@@ -10,12 +10,13 @@
   "web_accessible_resources": [ "main.html", "panel.html", "build/backend.js"],
 
   "background": {
-    "scripts": [ ]
+    "scripts": [ "background.js" ]
   },
 
   "permissions": [
     "file:///*",
     "http://*/*",
-    "https://*/*"
+    "https://*/*",
+    "tabs"
   ]
 }
