@@ -1,11 +1,8 @@
 // Utilities
-function log(s) {
+function log(...s) {
   const string = JSON.stringify(s);
   chrome.devtools.inspectedWindow.eval('console.log(' + string + ')')
 };
-
-const str = "hello world";
-log(str);
 
 function addEventListeners() {
   const lensSelector = document.getElementById('lensSelector');
@@ -20,5 +17,4 @@ function addEventListeners() {
   };
 }
 
-log('panel')
 addEventListeners();
