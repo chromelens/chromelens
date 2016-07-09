@@ -1,9 +1,18 @@
-var devToolsListener = function(message, sender, sendResponse) {
+const messageType = {
+  EXECUTE_SCRIPT: 'EXECUTE_SCRIPT'
+}
+
+const devToolsListener = function(message, sender, sendResponse) {
   console.log('background message received');
-  // Inject a content script into the identified tab
-  chrome.tabs.executeScript(message.tabId, {
-    file: message.scriptToInject
-  });
+  switch (message.type) {
+    case messageType.EXECUTE_SCRIPT: {
+      const { tabId, scriptToInject } = message.data;
+      // Inject a content script into the identified tab
+      chrome.tabs.executeScript(tabId, { file: scriptToInject });
+    }
+    default:
+      return null;
+  }
 }
 
 chrome.runtime.onMessage.addListener(devToolsListener);
