@@ -3,7 +3,7 @@
   "name": "Chrome Lens",
   "description": "Simulate visual impairment",
   "version": "0.0.1",
-  "minimum_chrome_version": "43",
+  "minimum_chrome_version": "42",
   "devtools_page": "main.html",
 
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
