@@ -5,7 +5,8 @@ function log(...s) {
 };
 
 const messageType = {
-  EXECUTE_SCRIPT: 'EXECUTE_SCRIPT'
+  EXECUTE_SCRIPT: 'EXECUTE_SCRIPT',
+  RUN_AXS: 'RUN_AXS'
 }
 
 // Global state
@@ -56,6 +57,16 @@ const addEventListeners = () => {
       });
     }
   };
+
+  const runAxsButton = document.getElementById('runAxs');
+  runAxsButton.onclick = function() {
+    chrome.runtime.sendMessage({
+      type: messageType.RUN_AXS,
+      data: {
+        tabId: chrome.devtools.inspectedWindow.tabId
+      }
+    })
+  }
 }
 
 addEventListeners();
