@@ -7,7 +7,9 @@ function log(...s) {
 
 const messageType = {
   EXECUTE_SCRIPT: 'EXECUTE_SCRIPT',
-  RUN_AXS: 'RUN_AXS'
+  RUN_AXS: 'RUN_AXS',
+  HIGHLIGHT_WARNING: 'HIGHLIGHT_WARNING',
+  UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING'
 }
 
 const lensType = {
@@ -201,6 +203,48 @@ const addEventListeners = () => {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
     })
+  }
+}
+
+function showAxsResults(idToWarningsMap) {
+  const resultRoot = document.querySelector('#axs-results');
+  for (i in idToWarningsMap) {
+    var div = document.createElement('div');
+    div.id = i;
+    var div_note = '[' + i + ']' +
+      '[' + idToWarningsMap[i].rule.severity + ']' +
+      idToWarningsMap[i].rule.heading;
+    div.innerText = div_note;
+
+    var link = document.createElement('a');
+    link.href = idToWarningsMap[i].rule.url;
+    link.target = '_blank';
+    link.innerText = idToWarningsMap[i].rule.code;
+
+    div.appendChild(link);
+    resultRoot.appendChild(div);
+  }
+
+  for (let i in idToWarningsMap) {
+    const warning = document.getElementById(i);
+    warning.onmouseover = function() {
+      chrome.runtime.sendMessage({
+        type: messageType.HIGHLIGHT_WARNING,
+        data: {
+          tabId: chrome.devtools.inspectedWindow.tabId,
+          warningId: i
+        }
+      });
+    }
+    warning.onmouseout = function() {
+      chrome.runtime.sendMessage({
+        type: messageType.UNHIGHLIGHT_WARNING,
+        data: {
+          tabId: chrome.devtools.inspectedWindow.tabId,
+          warningId: i
+        }
+      });
+    }
   }
 }
 

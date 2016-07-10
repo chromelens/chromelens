@@ -113,7 +113,7 @@ function tooltipNode(offendingEl) {
   div.style.width = width + 'px';
   div.style.height = height + 'px';
   // this id will be useful if we want to reference specific warnings emitted
-  div.id = 'chrome-lens-warning-' + id;
+  div.id = 'chrome-lens-warning-' + WARNING_COUNT;
   return div;
 }
 
@@ -126,7 +126,8 @@ function suggestFix(ruleViolated) {
 }
 
 function highlightElementForRuleViolation(el, rule_violated) {
-  idToWarningsMap[id++] = {el: el, rule: rule_violated}
+  const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
+  idToWarningsMap[warningId] = {el: el, rule: rule_violated}
 
   const {top, right, bottom, left, width, height, x, y} = el.getBoundingClientRect()
 
@@ -147,7 +148,7 @@ function highlightElementForRuleViolation(el, rule_violated) {
 var run_result = axs.Audit.run();
 initDom()
 var idToWarningsMap = {}
-var id = 0;
+var WARNING_COUNT = 0;
 
 run_result.forEach(function(v) {
   // we only want to highlight failures
@@ -158,11 +159,35 @@ run_result.forEach(function(v) {
   })
 })
 // console.log(run_result);
-// console.log(idToWarningsMap);
+console.log(idToWarningsMap);
 
 chrome.runtime.sendMessage({
   type: 'AXS_COMPLETE',
   data: {
-    result: run_result
+    result: run_result,
+    idToWarningsMap: idToWarningsMap
+  }
+})
+
+chrome.runtime.onMessage.addListener(function(message) {
+  switch (message.type) {
+    case 'HIGHLIGHT_WARNING': {
+      const { warningId } = message.data;
+      const warningTooltip = document.querySelector('#' + warningId + ' .tooltip-text');
+      if (!warningTooltip) { return; }
+      warningTooltip.style.visibility = 'visible';
+      break;
+    }
+    case 'UNHIGHLIGHT_WARNING': {
+      const { warningId } = message.data;
+      const warningTooltip = document.querySelector('#' + warningId + ' .tooltip-text');
+      if (!warningTooltip) { return; }
+      // we must set to null so that CSS can take over
+      warningTooltip.style.visibility = null;
+      break;
+    }
+    default:{
+        break;
+    }
   }
 })
