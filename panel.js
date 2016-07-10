@@ -9,9 +9,9 @@ const messageType = {
   EXECUTE_SCRIPT: 'EXECUTE_SCRIPT',
   RUN_AXS: 'RUN_AXS',
   HIGHLIGHT_WARNING: 'HIGHLIGHT_WARNING',
-  UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING'
+  UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING',
+  TRACE_TAB_PATH: 'TRACE_TAB_PATH'
 }
-
 const lensType = {
   ACHROMATOMALY: {
     name: 'Achromatomaly',
@@ -171,30 +171,6 @@ const addEventListeners = () => {
   // Maintain lens across navigations
   chrome.devtools.network.onNavigated.addListener(setSelectedLens);
 
-  // const stickyMouse = document.getElementById('stickymouseCbox');
-  // stickyMouse.onchange = function(){
-  //   if(this.checked)
-  //   {
-  //     chrome.runtime.sendMessage({
-  //       type: messageType.EXECUTE_SCRIPT,
-  //       data: {
-  //         tabId: chrome.devtools.inspectedWindow.tabId,
-  //         scriptToInject: 'stickymouse/magnify.js'
-  //       }
-  //     });
-  //   }
-  //   else
-  //   {
-  //     chrome.runtime.sendMessage({
-  //       type: messageType.EXECUTE_SCRIPT,
-  //       data: {
-  //         tabId: chrome.devtools.inspectedWindow.tabId,
-  //         scriptToInject: 'stickymouse/normalize.js'
-  //       }
-  //     });
-  //   }
-  // };
-
   const runAxsButton = document.getElementById('runAxs');
   runAxsButton.onclick = function() {
     chrome.runtime.sendMessage({
@@ -203,7 +179,18 @@ const addEventListeners = () => {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
     })
-  }
+  };
+
+  const traceTabPathButton = document.getElementById('traceTabPath');
+  traceTabPathButton.onclick = function() {
+    log('clicked')
+    chrome.runtime.sendMessage({
+      type: messageType.TRACE_TAB_PATH,
+      data: {
+        tabId: chrome.devtools.inspectedWindow.tabId
+      }
+    })
+  };
 }
 
 function showAxsResults(idToWarningsMap) {
