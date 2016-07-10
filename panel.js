@@ -113,7 +113,7 @@ const addEventListeners = () => {
   }
 
   // Maintain lens across navigations
-  chrome.devtools.network.onNavigated.addListener(() => changeLens(getSelectedLens()));
+  chrome.devtools.network.onNavigated.addListener(setSelectedLens);
 
   const stickyMouse = document.getElementById('stickymouseCbox');
   stickyMouse.onchange = function(){
