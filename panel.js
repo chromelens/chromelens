@@ -53,6 +53,24 @@ const lensType = {
     stats: { },
     description: 'Limited vision'
   },
+  PARTIAL_BLINDNESS_MILD: {
+    name: 'Partial blindness (mild)',
+    file: 'lens_partialblindness_mild.js',
+    stats: { },
+    description: 'Limited vision (mild)'
+  },
+  PARTIAL_BLINDNESS_MEDIUM: {
+    name: 'Partial blindness (medium)',
+    file: 'lens_partialblindness_medium.js',
+    stats: { },
+    description: 'Limited vision (medium)'
+  },
+  PARTIAL_BLINDNESS_SERIOUS: {
+    name: 'Partial blindness (serious)',
+    file: 'lens_partialblindness_serious.js',
+    stats: { },
+    description: 'Limited vision (serious)'
+  },
   PROTANOMALY: {
     name: 'Protanomaly',
     file: 'lens_protanomaly.js',
