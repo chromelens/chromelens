@@ -3,6 +3,7 @@ console.log('content script loaded')
 delete document.body.style.filter;
 delete document.body.style.webkitFilter;
 
+// z-index at upper bound of 32bit int
 const styles = `
   background-color: black;
   pointer-events: none;
@@ -11,7 +12,7 @@ const styles = `
   height: 100%;
   width: 100%;
   position: fixed;
-  z-index: 9999999;
+  z-index: 2147483647;
 `
 
 var iDiv = document.createElement('div');
