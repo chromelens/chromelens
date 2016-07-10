@@ -1,4 +1,5 @@
 // Utilities
+//
 function log(...s) {
   const string = JSON.stringify(s);
   chrome.devtools.inspectedWindow.eval('console.log(' + string + ')')
@@ -79,11 +80,9 @@ const lensType = {
 }
 
 // Global state
-let currentLens;
 const lensDir = 'lenses/';
 
 const changeLens = (lens) => {
-  currentLens = lens;
   chrome.runtime.sendMessage({
     type: messageType.EXECUTE_SCRIPT,
     data: {
@@ -95,14 +94,26 @@ const changeLens = (lens) => {
 
 const addEventListeners = () => {
   const lensSelector = document.getElementById('lensSelector');
-  lensSelector.onchange = function(){
-    const lensName = this.options[this.selectedIndex].value;
-    const lens = lensType[lensName.toUpperCase()];
-    changeLens(lens);
-  };
+  const getSelectedLens = () => {
+    const { options, selectedIndex } = lensSelector;
+    const { value } = options[selectedIndex];
+    const lens = lensType[value.toUpperCase()];
+    log(lens);
+    return lens;
+  }
+  const setSelectedLens = () => lensEnabledCheckbox.checked ?
+    changeLens(getSelectedLens()) : changeLens(lensType.EMPTY);
+
+  lensSelector.onchange = setSelectedLens;
+
+  const lensEnabledCheckbox = document.getElementById('lensEnabledCheckbox');
+  lensEnabledCheckbox.onclick = function() {
+    lensSelector.disabled = !this.checked;
+    setSelectedLens();
+  }
 
   // Maintain lens across navigations
-  chrome.devtools.network.onNavigated.addListener(() => changeLens(currentLens));
+  chrome.devtools.network.onNavigated.addListener(() => changeLens(getSelectedLens()));
 
   const stickyMouse = document.getElementById('stickymouseCbox');
   stickyMouse.onchange = function(){
