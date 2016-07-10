@@ -15,85 +15,99 @@ const lensType = {
     name: 'Achromatomaly',
     file: 'lens_achromatomaly.js',
     stats: { },
-    description: 'Absence of most colors'
+    description: 'Absence of most colors.'
   },
   ACHROMATOPSIA: {
     name: 'Achromatopsia',
     file: 'lens_achromatopsia.js',
     stats: { },
-    description: 'No colors at all'
+    description: 'No colors at all.'
   },
   DEUTERANOMALY: {
     name: 'Deuteranomaly',
     file: 'lens_deuteranomaly.js',
-    stats: { },
-    description: 'Low amounts of green color'
+    stats: {
+      male: 5,
+      female: 0.35
+    },
+    description: 'Low amounts of green color.'
   },
   DEUTERANOPIA: {
     name: 'Deuteranopia',
     file: 'lens_deuteranopia.js',
-    stats: { },
-    description: 'No green color at all'
+    stats: {
+      male: 1,
+      female: 0.1
+    },
+    description: 'No green color at all.'
   },
   EMPTY: {
     name: 'Normal vision',
     file: 'lens_empty.js',
     stats: { },
-    description: 'Normal vision'
+    description: 'Normal vision.'
   },
   FULL_BLINDNESS: {
     name: 'Full blindness',
     file: 'lens_fullblindness.js',
-    stats: { },
-    description: 'No vision at all'
-  },
-  PARTIAL_BLINDNESS: {
-    name: 'Partial blindness',
-    file: 'lens_partialblindness.js',
-    stats: { },
-    description: 'Limited vision'
+    stats: {
+      count: '39 million (WHO)'
+    },
+    description: 'No vision at all.'
   },
   PARTIAL_BLINDNESS_MILD: {
     name: 'Partial blindness (mild)',
     file: 'lens_partialblindness_mild.js',
-    stats: { },
-    description: 'Limited vision (mild)'
+    stats: {
+      count: '246 million (WHO)'
+    },
+    description: 'Limited vision (mild).'
   },
   PARTIAL_BLINDNESS_MEDIUM: {
     name: 'Partial blindness (medium)',
     file: 'lens_partialblindness_medium.js',
-    stats: { },
-    description: 'Limited vision (medium)'
+    stats: {
+      count: '246 million (WHO)'
+    },
+    description: 'Limited vision (medium).'
   },
   PARTIAL_BLINDNESS_SERIOUS: {
     name: 'Partial blindness (serious)',
     file: 'lens_partialblindness_serious.js',
-    stats: { },
-    description: 'Limited vision (serious)'
+    stats: {
+      count: '246 million (WHO)'
+    },
+    description: 'Limited vision (serious). Able to differentiate light vs dark.'
   },
   PROTANOMALY: {
     name: 'Protanomaly',
     file: 'lens_protanomaly.js',
-    stats: { },
-    description: 'Low amounts of red color'
+    stats: {
+      male: 1.08,
+      female: 0.03
+    },
+    description: 'Low amounts of red color.',
   },
   PROTANOPIA: {
     name: 'Protanopia',
     file: 'lens_protanopia.js',
-    stats: { },
-    description: 'No red color at all'
+    stats: {
+      male: 1.01,
+      female: 0.02
+    },
+    description: 'No red color at all.'
   },
   TRITANOMALY: {
     name: 'Tritanomaly',
     file: 'lens_tritanomaly.js',
     stats: { },
-    description: 'Low amounts of blue'
+    description: 'Low amounts of blue color.'
   },
   TRITANOPIA: {
     name: 'Tritanopia',
     file: 'lens_tritanopia.js',
     stats: { },
-    description: 'No blue color at all'
+    description: 'No blue color at all.'
   }
 }
 
@@ -116,9 +130,20 @@ const changeLens = (lens) => {
       scriptToInject: lensDir + lens.file
     }
   });
+  const { description, stats } = lens;
+
   const lensDetail = document.getElementById('lensDetail');
-  const { description } = lens;
   lensDetail.innerHTML = description;
+
+  const statsDetail = document.getElementById('statsDetail');
+  statsDetail.innerHTML = `
+    Affects: <br />
+      Population % - Male: ${stats.male || 'unknown'}, Female: ${stats.female || 'unknown'} <br />
+      Population count: ${stats.count}
+  `;
+
+  // http://www.colourblindawareness.org/colour-blindness/types-of-colour-blindness/
+  // http://www.color-blindness.com/
 }
 
 const addEventListeners = () => {

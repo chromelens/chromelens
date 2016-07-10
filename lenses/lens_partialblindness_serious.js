@@ -1,11 +1,11 @@
 console.log('content script loaded')
 
-document.body.style.filter = "blur(4px)";
-document.body.style.webkitFilter = "blur(4px)";
+document.body.style.filter = "blur(10px)";
+document.body.style.webkitFilter = "blur(10px)";
 
 // z-index at upper bound of 32bit int
 var styles = `
-  background: rgba(50, 50, 50, 0.8);
+  background: rgba(50, 50, 50, 0.5);
   pointer-events: none;
   top: 0;
   left: 0;

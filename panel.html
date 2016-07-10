@@ -4,7 +4,6 @@
     <meta charset="utf8">
   </head>
   <body>
-
     <h1>ChromeLens</h1>
     <h3>A tool for accessibility development</h3>
     <input id="lensEnabledCheckbox" type="checkbox">Enable lens</input>
@@ -14,18 +13,18 @@
       <option value="partial_blindness_mild">Partial blindness (mild)</option>
       <option value="partial_blindness_medium">Partial blindness (medium)</option>
       <option value="partial_blindness_serious">Partial blindness (serious)</option>
-      <option value="protanomaly">Protanomaly (R)</option>
-      <option value="protanopia">Protanopia (R)</option>
-      <option value="deuteranomaly">Deuteranomaly (G)</option>
-      <option value="deuteranopia">Deuteranopia (G)</option>
-      <option value="tritanomaly">Tritanomaly (B)</option>
-      <option value="tritanopia">Tritanopia (B)</option>
-      <option value="achromatopsia">Achromatopsia (RGB)</option>
-      <option value="achromatomaly">Achromatomaly (RGB)</option>
+      <option value="protanomaly">Protanomaly (red-weak)</option>
+      <option value="protanopia">Protanopia (red-blind)</option>
+      <option value="deuteranomaly">Deuteranomaly (green-weak)</option>
+      <option value="deuteranopia">Deuteranopia (green-blind)</option>
+      <option value="tritanomaly">Tritanomaly (blue-weak)</option>
+      <option value="tritanopia">Tritanopia (blue-blind)</option>
+      <option value="achromatopsia">Achromatopsia (RGB-weak)</option>
+      <option value="achromatomaly">Achromatomaly (RGB-blind)</option>
     </select>
 
     <div id="lensDetail"></div>
-
+    <div id="statsDetail"></div>
     <hr />
 
     <button id='runAxs'>
