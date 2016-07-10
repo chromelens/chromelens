@@ -47,6 +47,8 @@ function getCoordinates(elem) {
     var box = elem.getBoundingClientRect();
     var body = document.body;
     var docEl = document.documentElement;
+    var halfWidth = box.width / 2;
+    var halfHeight = box.height / 2;
 
     var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
     var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
@@ -57,5 +59,5 @@ function getCoordinates(elem) {
     var top  = box.top +  scrollTop - clientTop;
     var left = box.left + scrollLeft - clientLeft;
 
-    return { top: Math.round(top), left: Math.round(left) };
+    return { top: Math.round(top + halfHeight), left: Math.round(left + halfWidth) };
 }
