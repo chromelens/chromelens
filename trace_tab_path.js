@@ -12,7 +12,6 @@ var width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.
 
 console.log(height, width)
 
-
 var canvas = document.createElement("canvas");
 canvas.id = 'canvas';
 canvas.style.pointerEvents = 'none';
@@ -26,19 +25,25 @@ canvas.style.zIndex = 2147483647;
 var ctx = canvas.getContext('2d');
 ctx.beginPath();
 ctx.moveTo(0, 0);
-// ctx.lineTo(100, 100);
-// ctx.lineTo(200, 100);
-// ctx.stroke();
+if (document.activeElement !== document.body) {
+  const { top: y, left: x } = getCoordinates(document.activeElement);
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}
 
 document.body.appendChild(canvas);
 
-document.onkeyup = function (e) {
+document.body.onkeyup = function (e) {
     e = e || window.event;
     if (e.keyCode === 9) {
       // Tab
       const { top: y, left: x } = getCoordinates(e.target);
       console.log(x, y);
       ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'red';
       ctx.stroke();
     }
 };
