@@ -1,9 +1,11 @@
+var BASE_Z = 999999;
+var TOOLTIP_Z = BASE_Z + 1;
 var STYLE =
   '#chrome-lens-base {' +
   '  position: absolute;' +
   '  top: 0;' +
   '  left: 0;' +
-  '  z-index: 999999;' +
+  '  z-index: ' + BASE_Z + ';' +
   '}' +
   '.chrome-lens-warning {' +
   '  position: absolute;' +
@@ -13,12 +15,23 @@ var STYLE =
   '.tooltip .tooltip-text {' +
   '  visibility: hidden;' +
   '  display: inline-block;' +
-  '  background-color: black;' +
-  '  color: #fff;' +
+  '  background-color: #fffdfd;' +
+  '  color: #212121;' +
   '  position: absolute;' +
   '  max-width: 300px;' +
-  '  padding: 10px 5px;' +
+  '  min-width: 200px;' +
+  '  padding: 0px 10px 5px 10px;' +
   '  border-radius: 2px;' +
+  '  border: 1px solid black;' +
+  '  z-index: ' + TOOLTIP_Z + ';' +
+  '}' +
+  '.tooltip .tooltip-text .severe {' +
+  '  color: #c10f0f;' +
+  '  font-weight: 900;' +
+  '}' +
+  '.tooltip .tooltip-text .warning {' +
+  '  color: #e69808;' +
+  '  font-weight: 700;' +
   '}' +
   '.tooltip:hover .tooltip-text {' +
   '  visibility: visible;' +
@@ -45,20 +58,21 @@ function initDom() {
 
 function tooltipHeader(severity, code, url) {
   const el = document.createElement('p');
-  const s = document.createElement('span');
+  const severityEl = document.createElement('span');
   if (severity === 'Severe') {
-    s.innerText = severity;
+    severityEl.className = 'severe'
+  } else if (severity === 'Warning') {
+    severityEl.className = 'warning'
   }
-  else {
-    s.innerText = severity;
-  }
+  severityEl.innerText = severity;
 
   const codeLink = document.createElement('a');
   codeLink.href = url;
   codeLink.innerText = code;
   codeLink.target = '_blank';
 
-  el.appendChild(s);
+  el.appendChild(severityEl);
+  el.appendChild(document.createTextNode(' '));
   el.appendChild(codeLink);
   return el;
 }
@@ -84,6 +98,8 @@ function tooltipTextNode(rule_violated) {
   tooltipText.className = 'tooltip-text';
   tooltipText.appendChild(tooltipHeader(severity, code, url));
   tooltipText.appendChild(document.createTextNode(heading));
+
+  suggestFix(rule_violated);
   return tooltipText;
 }
 
@@ -99,6 +115,14 @@ function tooltipNode(offendingEl) {
   // this id will be useful if we want to reference specific warnings emitted
   div.id = 'chrome-lens-warning-' + id;
   return div;
+}
+
+function suggestFix(ruleViolated) {
+  const {code, heading, name, severity, url} = ruleViolated;
+  if (code === 'AX_ARIA_10') {
+
+    console.log('aCKLJALFKDJFJ');
+  }
 }
 
 function highlightElementForRuleViolation(el, rule_violated) {
