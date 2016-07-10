@@ -11,7 +11,7 @@ var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, h
 var width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
 
 var canvas = document.createElement("canvas");
-canvas.id = 'canvas';
+canvas.id = 'chrome-lens-canvas';
 canvas.style.pointerEvents = 'none';
 canvas.style.top = 0;
 canvas.style.left = 0;

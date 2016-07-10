@@ -10,7 +10,8 @@ const messageType = {
   RUN_AXS: 'RUN_AXS',
   HIGHLIGHT_WARNING: 'HIGHLIGHT_WARNING',
   UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING',
-  TRACE_TAB_PATH: 'TRACE_TAB_PATH'
+  TRACE_TAB_PATH: 'TRACE_TAB_PATH',
+  PNG_TAB_PATH: 'PNG_TAB_PATH'
 }
 const lensType = {
   ACHROMATOMALY: {
@@ -186,6 +187,16 @@ const addEventListeners = () => {
     log('clicked')
     chrome.runtime.sendMessage({
       type: messageType.TRACE_TAB_PATH,
+      data: {
+        tabId: chrome.devtools.inspectedWindow.tabId
+      }
+    })
+  };
+
+  const pngTabPathButton = document.getElementById('pngTabPath');
+  pngTabPathButton.onclick = function() {
+    chrome.runtime.sendMessage({
+      type: messageType.PNG_TAB_PATH,
       data: {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
