@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "ChromeLens",
   "description": "Visual impairment simulation and auditing tools to develop for accessibility.",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "minimum_chrome_version": "42",
   "devtools_page": "main.html",
 
