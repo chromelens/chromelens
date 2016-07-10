@@ -183,6 +183,8 @@ const addEventListeners = () => {
   };
 
   const traceTabPathButton = document.getElementById('traceTabPath');
+  const pngTabPathButton = document.getElementById('pngTabPath');
+
   traceTabPathButton.onclick = function() {
     log('clicked')
     chrome.runtime.sendMessage({
@@ -191,9 +193,9 @@ const addEventListeners = () => {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
     })
+    pngTabPathButton.style.visibility = null;
   };
 
-  const pngTabPathButton = document.getElementById('pngTabPath');
   pngTabPathButton.onclick = function() {
     chrome.runtime.sendMessage({
       type: messageType.PNG_TAB_PATH,

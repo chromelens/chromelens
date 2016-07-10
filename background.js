@@ -90,6 +90,7 @@ const devToolsListener = function(message, sender, sendResponse) {
     }
     case messageType.PNG_TAB_PATH: {
       const { tabId } = message.data;
+      chrome.tabs.executeScript(tabId, { file: 'html2canvas.js' });
       chrome.tabs.executeScript(tabId, { file: 'png_tab_path.js' });
       break;
     }
