@@ -193,22 +193,33 @@ const addEventListeners = () => {
   };
 }
 
+function severityNode(severity) {
+  var span = document.createElement('span');
+  span.classList.add( severity.toLowerCase());
+  span.innerText = severity;
+  return span;
+}
+
 function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
   for (i in idToWarningsMap) {
-    var div = document.createElement('div');
-    div.class = 'result-line';
+    var div = document.createElement('li');
+    div.classList.add('result-line');
     div.id = i;
-    var div_note = '[' + i + ']' +
-      '[' + idToWarningsMap[i].rule.severity + ']' +
-      idToWarningsMap[i].rule.heading;
-    div.innerText = div_note;
+
+    var s_el = severityNode(idToWarningsMap[i].rule.severity);
+    div.appendChild(s_el);
+    div.appendChild(document.createTextNode(' '));
+
+    var div_note = idToWarningsMap[i].rule.heading;
+    div.appendChild(document.createTextNode(div_note))
 
     var link = document.createElement('a');
     link.href = idToWarningsMap[i].rule.url;
     link.target = '_blank';
     link.innerText = idToWarningsMap[i].rule.code;
 
+    div.appendChild(document.createTextNode(' '));
     div.appendChild(link);
     resultRoot.appendChild(div);
   }
