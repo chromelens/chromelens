@@ -114,14 +114,30 @@ function tooltipNode(offendingEl) {
   div.style.height = height + 'px';
   // this id will be useful if we want to reference specific warnings emitted
   div.id = 'chrome-lens-warning-' + WARNING_COUNT;
+
+  div.onmouseover = function() {
+    chrome.runtime.sendMessage({
+      type: 'HIGHLIGHT_REPORT',
+      data: {
+        warningId: div.id
+      }
+    })
+  }
+  div.onmouseout = function() {
+    chrome.runtime.sendMessage({
+      type: 'UNHIGHLIGHT_REPORT',
+      data: {
+        warningId: div.id
+      }
+    })
+  }
+
   return div;
 }
 
 function suggestFix(ruleViolated) {
   const {code, heading, name, severity, url} = ruleViolated;
   if (code === 'AX_ARIA_10') {
-
-    console.log('aCKLJALFKDJFJ');
   }
 }
 

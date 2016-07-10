@@ -18,9 +18,23 @@ function createPanel() {
             if (_window) {
               _window.showAxsResults(idToWarningsMap);
             }
+            break;
+        }
+        case 'HIGHLIGHT_REPORT': {
+            const { warningId } = message.data;
+            if (_window) {
+              _window.highlightReportLine(warningId);
+            }
+            break;
+        }
+        case 'UNHIGHLIGHT_REPORT': {
+            const { warningId } = message.data;
+            if (_window) {
+              _window.unhighlightReportLine(warningId);
+            }
+            break;
         }
       }
-      log('on bgpconnection');
     });
     panel.onShown.addListener(function(window) {
       _window = window;

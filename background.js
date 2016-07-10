@@ -3,7 +3,9 @@ const messageType = {
   RUN_AXS: 'RUN_AXS',
   AXS_COMPLETE: 'AXS_COMPLETE',
   HIGHLIGHT_WARNING: 'HIGHLIGHT_WARNING',
-  UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING'
+  UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING',
+  HIGHLIGHT_REPORT: 'HIGHLIGHT_REPORT',
+  UNHIGHLIGHT_REPORT: 'UNHIGHLIGHT_REPORT'
 }
 
 const AXS_TESTING = 'axs_testing.js'
@@ -25,7 +27,6 @@ const devToolsListener = function(message, sender, sendResponse) {
     }
     case messageType.AXS_COMPLETE: {
       const { result, idToWarningsMap } = message.data;
-      console.log(idToWarningsMap);
       if (devtools) {
         devtools.postMessage({
           type: 'AXS_SHOW_RESULTS',
@@ -44,8 +45,6 @@ const devToolsListener = function(message, sender, sendResponse) {
             warningId: warningId
           }
         })
-        // chrome.tabs.executeScript(tabId, {
-        //   code: 'document.querySelector("#' + warningId + ' .tooltip-text").style.visibility = "visible"'});
         break;
     }
     case messageType.UNHIGHLIGHT_WARNING: {
@@ -56,9 +55,31 @@ const devToolsListener = function(message, sender, sendResponse) {
             warningId: warningId
           }
         })
-        // chrome.tabs.executeScript(tabId, {
-        //   code: 'document.querySelector("#' + warningId + ' .tooltip-text").style.visibility = "hidden"'});
         break;
+    }
+    case messageType.HIGHLIGHT_REPORT: {
+      const { warningId } = message.data;
+      if (devtools) {
+        devtools.postMessage({
+          type: messageType.HIGHLIGHT_REPORT,
+          data: {
+            warningId: warningId
+          }
+        })
+      }
+      break;
+    }
+    case messageType.UNHIGHLIGHT_REPORT: {
+      const { warningId } = message.data;
+      if (devtools) {
+        devtools.postMessage({
+          type: messageType.UNHIGHLIGHT_REPORT,
+          data: {
+            warningId: warningId
+          }
+        })
+      }
+      break;
     }
     default: {
       console.log(message);

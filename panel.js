@@ -210,6 +210,7 @@ function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
   for (i in idToWarningsMap) {
     var div = document.createElement('div');
+    div.class = 'result-line';
     div.id = i;
     var div_note = '[' + i + ']' +
       '[' + idToWarningsMap[i].rule.severity + ']' +
@@ -228,6 +229,7 @@ function showAxsResults(idToWarningsMap) {
   for (let i in idToWarningsMap) {
     const warning = document.getElementById(i);
     warning.onmouseover = function() {
+      _highlight(warning);
       chrome.runtime.sendMessage({
         type: messageType.HIGHLIGHT_WARNING,
         data: {
@@ -237,6 +239,7 @@ function showAxsResults(idToWarningsMap) {
       });
     }
     warning.onmouseout = function() {
+      _unhighlight(warning);
       chrome.runtime.sendMessage({
         type: messageType.UNHIGHLIGHT_WARNING,
         data: {
@@ -246,6 +249,24 @@ function showAxsResults(idToWarningsMap) {
       });
     }
   }
+}
+
+function highlightReportLine(warningId) {
+  const line = document.getElementById(warningId);
+  if (line) { _highlight(line); }
+}
+
+function unhighlightReportLine(warningId) {
+  const line = document.getElementById(warningId);
+  if (line) { _unhighlight(line); }
+}
+
+function _highlight(lineEl) {
+  lineEl.style.border = '2px solid blue';
+}
+
+function _unhighlight(lineEl) {
+  lineEl.style.border = null;
 }
 
 addEventListeners();
