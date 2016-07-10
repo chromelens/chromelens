@@ -18,11 +18,10 @@ canvas.id = 'canvas';
 canvas.style.pointerEvents = 'none';
 canvas.style.top = 0;
 canvas.style.left = 0;
-canvas.style.height = height + 'px'; 
-canvas.style.width = width + 'px';
+canvas.height = height;
+canvas.width = width;
 canvas.style.position = 'absolute';
 canvas.style.zIndex = 2147483647;
-canvas.style.border = '5px solid black';
 
 var ctx = canvas.getContext('2d');
 ctx.beginPath();
