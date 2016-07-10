@@ -10,8 +10,6 @@ var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, h
 
 var width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
 
-console.log(height, width)
-
 var canvas = document.createElement("canvas");
 canvas.id = 'canvas';
 canvas.style.pointerEvents = 'none';
@@ -38,7 +36,6 @@ document.body.onkeyup = function (e) {
     if (e.keyCode === 9) {
       // Tab
       const { top: y, left: x } = getCoordinates(e.target);
-      console.log(x, y);
       ctx.lineTo(x, y);
       ctx.stroke();
       ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
