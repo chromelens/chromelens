@@ -15,67 +15,67 @@ const lensType = {
     name: 'Achromatomaly',
     file: 'lens_achromatomaly.js',
     stats: { },
-    description: ''
+    description: 'Absence of most colors'
   },
   ACHROMATOPSIA: {
     name: 'Achromatopsia',
     file: 'lens_achromatopsia.js',
     stats: { },
-    description: ''
+    description: 'No colors at all'
   },
   DEUTERANOMALY: {
     name: 'Deuteranomaly',
     file: 'lens_deuteranomaly.js',
     stats: { },
-    description: ''
+    description: 'Low amounts of green color'
   },
   DEUTERANOPIA: {
     name: 'Deuteranopia',
     file: 'lens_deuteranopia.js',
     stats: { },
-    description: ''
+    description: 'No green color at all'
   },
   EMPTY: {
     name: 'Normal vision',
     file: 'lens_empty.js',
     stats: { },
-    description: ''
+    description: 'Normal vision'
   },
   FULL_BLINDNESS: {
     name: 'Full blindness',
     file: 'lens_fullblindness.js',
     stats: { },
-    description: ''
+    description: 'No vision at all'
   },
   PARTIAL_BLINDNESS: {
     name: 'Partial blindness',
     file: 'lens_partialblindness.js',
     stats: { },
-    description: ''
+    description: 'Limited vision'
   },
   PROTANOMALY: {
     name: 'Protanomaly',
     file: 'lens_protanomaly.js',
     stats: { },
-    description: ''
+    description: 'Low amounts of red color'
   },
   PROTANOPIA: {
     name: 'Protanopia',
     file: 'lens_protanopia.js',
     stats: { },
-    description: ''
+    description: 'No red color at all'
   },
   TRITANOMALY: {
     name: 'Tritanomaly',
     file: 'lens_tritanomaly.js',
     stats: { },
-    description: ''
+    description: 'Low amounts of blue'
   },
   TRITANOPIA: {
     name: 'Tritanopia',
     file: 'lens_tritanopia.js',
     stats: { },
-    description: ''
+    description: 'No blue color at all'
   }
 }
 
@@ -98,6 +98,9 @@ const changeLens = (lens) => {
       scriptToInject: lensDir + lens.file
     }
   });
+  const lensDetail = document.getElementById('lensDetail');
+  const { description } = lens;
+  lensDetail.innerHTML = description;
 }
 
 const addEventListeners = () => {
