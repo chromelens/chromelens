@@ -4,8 +4,6 @@ function log(...s) {
   chrome.devtools.inspectedWindow.eval('console.log(' + string + ')')
 };
 
-// Global variables
-
 // Create panel
 function createPanel() {
   chrome.devtools.panels.create('ChromeLens', '', 'panel.html', function(panel) {
