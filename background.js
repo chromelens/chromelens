@@ -13,14 +13,17 @@ const devToolsListener = function(message, sender, sendResponse) {
       const { tabId, scriptToInject } = message.data;
       // Inject a content script into the identified tab
       chrome.tabs.executeScript(tabId, { file: scriptToInject });
+      break;
     }
     case messageType.RUN_AXS: {
       const { tabId } = message.data;
       chrome.tabs.executeScript(tabId, { file: AXS_TESTING });
       chrome.tabs.executeScript(tabId, { file: 'run_axs.js' });
+      break;
     }
     case messageType.AXS_COMPLETE: {
-        const { result } = message.data;
+      const { result } = message.data;
+      break;
     }
     default: {
       return null;
