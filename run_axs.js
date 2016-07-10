@@ -31,7 +31,7 @@ var CHROME_LENS_WARNING_CLASS = 'chrome-lens-warning'
 function initDom() {
   if (document.querySelector('#' + CHROME_LENS_STYLE_ID)) return;
 
-  var style = document.createElement('style');
+  const style = document.createElement('style');
   style.id = CHROME_LENS_STYLE_ID;
   style.innerHTML = STYLE;
   document.head.appendChild(style)
@@ -45,70 +45,79 @@ function initDom() {
 
 function tooltipHeader(severity, code, url) {
   const el = document.createElement('p');
+  const s = document.createElement('span');
   if (severity === 'Severe') {
-    el.innerText = severity;
+    s.innerText = severity;
   }
   else {
-    el.innerText = severity;
+    s.innerText = severity;
   }
-  el.appendChild(codeNode(code, url));
+
+  const codeLink = document.createElement('a');
+  codeLink.href = url;
+  codeLink.innerText = code;
+  codeLink.target = '_blank';
+
+  el.appendChild(s);
+  el.appendChild(codeLink);
   return el;
 }
 
-function codeNode(code, url) {
-  const el = document.createElement('a');
-  el.href = url;
-  el.innerText = code;
-  return el;
-}
-
-function positionTooltip(tooltipText, el_top, el_left, el_height, el_right, el_width) {
+function positionTooltip(tooltipText, el_top, el_left, el_height) {
   const {width, height} = tooltipText.getBoundingClientRect();
-  console.log(height);
-  console.log(el_top);
   if (height < el_top) {
+    // tooltip cannot fit above, make it below
     tooltipText.style.bottom = el_height + 'px';
   } else {
+    // tooltip goes above
     tooltipText.style.top = el_height + 'px';
   }
   if (el_left + width > document.documentElement.clientWidth) {
-    tooltipText.style.right = el_width + 'px';
+    // tooltip is wider than the el, right align el and tooltip
+    tooltipText.style.right = 0 + 'px';
   }
 }
 
-function indicate(el, rule_violated) {
-  idToWarningsMap[id++] = {el: el, rule: rule_violated}
-
-  // console.log(el.getBoundingClientRect());
-  const {top, right, bottom, left, width, height, x, y} = el.getBoundingClientRect()
+function tooltipTextNode(rule_violated) {
   const {code, heading, name, severity, url} = rule_violated;
-
-  // el.style.backgroundColor = 'red';
   const tooltipText = document.createElement('div');
   tooltipText.className = 'tooltip-text';
-  const link = document.createElement('a');
-  link.href = url;
-  // tooltip.innerText = severity + code + heading;
   tooltipText.appendChild(tooltipHeader(severity, code, url));
   tooltipText.appendChild(document.createTextNode(heading));
+  return tooltipText;
+}
 
+function tooltipNode(offendingEl) {
+  const {top, right, bottom, left, width, height, x, y} = offendingEl.getBoundingClientRect()
   const div = document.createElement('div');
   div.className = CHROME_LENS_WARNING_CLASS;
   div.classList.add('tooltip');
-
   div.style.left = left + 'px';
   div.style.top = top + 'px';
   div.style.width = width + 'px';
   div.style.height = height + 'px';
+  // this id will be useful if we want to reference specific warnings emitted
   div.id = 'chrome-lens-warning-' + id;
-  div.appendChild(tooltipText);
+  return div;
+}
 
+function highlightElementForRuleViolation(el, rule_violated) {
+  idToWarningsMap[id++] = {el: el, rule: rule_violated}
+
+  const {top, right, bottom, left, width, height, x, y} = el.getBoundingClientRect()
+
+  // if this isn't visible let's not warn about
+  if (top < 0 || left < 0) return;
+
+  const tooltipText = tooltipTextNode(rule_violated);
+  const toolTip = tooltipNode(el);
+  toolTip.appendChild(tooltipText);
 
   const base = document.querySelector('#' + CHROME_LENS_BASE_ID);
-  base.appendChild(div);
-  console.log(tooltipText.getBoundingClientRect());
-  console.log(el);
-  positionTooltip(tooltipText, top, left, height, right, width);
+  base.appendChild(toolTip);
+  // we can only position after we append, because tooltipText has no
+  // bounding client rect before it gets added to the DOM
+  positionTooltip(tooltipText, top, left, height);
 }
 
 var run_result = axs.Audit.run();
@@ -117,20 +126,15 @@ var idToWarningsMap = {}
 var id = 0;
 
 run_result.forEach(function(v) {
-  if (v.result !== 'FAIL') {
-    return;
-  }
+  // we only want to highlight failures
+  if (v.result !== 'FAIL') { return; }
 
   v.elements.forEach(function(el) {
-    const {top, right, bottom, left, width, height, x, y} = el.getBoundingClientRect()
-    // if this isn't visible let's not warn about
-    if (top < 0 || left < 0) return;
-
-    indicate(el, v.rule);
+    highlightElementForRuleViolation(el, v.rule);
   })
 })
-console.log(run_result);
-console.log(idToWarningsMap);
+// console.log(run_result);
+// console.log(idToWarningsMap);
 
 chrome.runtime.sendMessage({
   type: 'AXS_COMPLETE',
