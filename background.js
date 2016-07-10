@@ -6,7 +6,8 @@ const messageType = {
   UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING',
   HIGHLIGHT_REPORT: 'HIGHLIGHT_REPORT',
   UNHIGHLIGHT_REPORT: 'UNHIGHLIGHT_REPORT',
-  TRACE_TAB_PATH: 'TRACE_TAB_PATH'
+  TRACE_TAB_PATH: 'TRACE_TAB_PATH',
+  PNG_TAB_PATH: 'PNG_TAB_PATH'
 }
 
 const AXS_TESTING = 'axs_testing.js'
@@ -85,6 +86,12 @@ const devToolsListener = function(message, sender, sendResponse) {
     case messageType.TRACE_TAB_PATH: {
       const { tabId } = message.data;
       chrome.tabs.executeScript(tabId, { file: 'trace_tab_path.js' });
+      break;
+    }
+    case messageType.PNG_TAB_PATH: {
+      const { tabId } = message.data;
+      chrome.tabs.executeScript(tabId, { file: 'html2canvas.js' });
+      chrome.tabs.executeScript(tabId, { file: 'png_tab_path.js' });
       break;
     }
     default: {

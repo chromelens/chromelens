@@ -1,8 +1,21 @@
-Slate
-=====
-Slate is responsive theme for GitHub Pages. [Fork it](https://github.com/jsncostello/slate/fork_select) and use it on your own site or generate one automatically using [GitHub Pages](http://pages.github.com).
+# ChromeLens
 
-Slate in use:
-![Slate](https://f.cloud.github.com/assets/416727/1730110/c72a2f96-62d3-11e3-9d6f-efc53e24aeb2.png)
+<a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Chrome Web Store</a>
 
-Slate is available under the MIT license.
+ChromeLens is a Google Chrome extension that provides a suite of tools to help
+with web accessibility development.
+
+### Lens (Vision Simulator)
+
+Interact with a website as a completely/partially blind or a colorblind person. 
+
+### Accessibility Audit
+
+Run a website through an series of accessibility rules and easily discover
+elements in your website that do not comply with them.
+
+### Tab-tracker
+
+Key website features should be navigable solely via the keyboard (tab button),
+while not making the user jump through hoops to get to a feature. With the
+tab-tracker, you can visually track the flow of navigation through a website.

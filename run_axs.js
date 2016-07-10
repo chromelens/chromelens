@@ -103,8 +103,25 @@ function tooltipTextNode(rule_violated) {
   return tooltipText;
 }
 
+function getCoordinates(elem) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docEl = document.documentElement;
+
+    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+    var clientTop = docEl.clientTop || body.clientTop || 0;
+    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+    var top  = box.top +  scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+    return { top, left, height: box.height, width: box.width }
+}
+
 function tooltipNode(offendingEl) {
-  const {top, right, bottom, left, width, height, x, y} = offendingEl.getBoundingClientRect()
+  const { top, left, height, width} = getCoordinates(offendingEl);
+
   const div = document.createElement('div');
   div.className = CHROME_LENS_WARNING_CLASS;
   div.classList.add('tooltip');
@@ -145,7 +162,7 @@ function highlightElementForRuleViolation(el, rule_violated) {
   const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
   idToWarningsMap[warningId] = {el: el, rule: rule_violated}
 
-  const {top, right, bottom, left, width, height, x, y} = el.getBoundingClientRect()
+  const { top, left, height, width } = getCoordinates(el);
 
   // if this isn't visible let's not warn about
   if (top < 0 || left < 0) return;
