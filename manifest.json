@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Chrome Lens",
+  "name": "ChromeLens",
   "description": "Visual impairment simulation and auditing tools to develop for accessibility.",
   "version": "0.0.2",
   "minimum_chrome_version": "42",
@@ -14,8 +14,8 @@
   },
 
   "icons": {
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
+    "48": "icons/chromelens2-48.png",
+    "128": "icons/chromelens2-128.png"
   },
 
   "permissions": [
