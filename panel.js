@@ -83,6 +83,14 @@ const lensType = {
 const lensDir = 'lenses/';
 
 const changeLens = (lens) => {
+  // Remove any lens div
+  chrome.runtime.sendMessage({
+    type: messageType.EXECUTE_SCRIPT,
+    data: {
+      tabId: chrome.devtools.inspectedWindow.tabId,
+      scriptToInject: lensDir + 'reset.js'
+    }
+  });
   chrome.runtime.sendMessage({
     type: messageType.EXECUTE_SCRIPT,
     data: {
