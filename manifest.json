@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Chrome Lens",
-  "description": "Simulate visual impairment",
+  "description": "Visual impairment simulation and auditing tools to develop for accessibility.",
   "version": "0.0.1",
   "minimum_chrome_version": "42",
   "devtools_page": "main.html",
@@ -11,6 +11,11 @@
 
   "background": {
     "scripts": [ "background.js" ]
+  },
+
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
 
   "permissions": [

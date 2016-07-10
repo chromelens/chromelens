@@ -144,29 +144,29 @@ const addEventListeners = () => {
   // Maintain lens across navigations
   chrome.devtools.network.onNavigated.addListener(setSelectedLens);
 
-  const stickyMouse = document.getElementById('stickymouseCbox');
-  stickyMouse.onchange = function(){
-    if(this.checked)
-    {
-      chrome.runtime.sendMessage({
-        type: messageType.EXECUTE_SCRIPT,
-        data: {
-          tabId: chrome.devtools.inspectedWindow.tabId,
-          scriptToInject: 'stickymouse/magnify.js'
-        }
-      });
-    }
-    else
-    {
-      chrome.runtime.sendMessage({
-        type: messageType.EXECUTE_SCRIPT,
-        data: {
-          tabId: chrome.devtools.inspectedWindow.tabId,
-          scriptToInject: 'stickymouse/normalize.js'
-        }
-      });
-    }
-  };
+  // const stickyMouse = document.getElementById('stickymouseCbox');
+  // stickyMouse.onchange = function(){
+  //   if(this.checked)
+  //   {
+  //     chrome.runtime.sendMessage({
+  //       type: messageType.EXECUTE_SCRIPT,
+  //       data: {
+  //         tabId: chrome.devtools.inspectedWindow.tabId,
+  //         scriptToInject: 'stickymouse/magnify.js'
+  //       }
+  //     });
+  //   }
+  //   else
+  //   {
+  //     chrome.runtime.sendMessage({
+  //       type: messageType.EXECUTE_SCRIPT,
+  //       data: {
+  //         tabId: chrome.devtools.inspectedWindow.tabId,
+  //         scriptToInject: 'stickymouse/normalize.js'
+  //       }
+  //     });
+  //   }
+  // };
 
   const runAxsButton = document.getElementById('runAxs');
   runAxsButton.onclick = function() {
