@@ -4,77 +4,75 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Slate is a responsive theme for GitHub Pages" />
+    <meta name="description" content="Chromelens, a Chrome DevTool for web accessibility development" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
-    <title>Slate : A responsive theme for GitHub Pages</title>
+    <title>Chromelens</title>
   </head>
 
   <body>
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/jin/chromelens">View on GitHub</a>
+      <header class="inner">
+        <a id="forkme_banner" href="https://github.com/jin/chromelens">View on GitHub</a>
 
-            <div style="margin-left:auto;margin-right:auto;display:block;">
-                <div style="width:150px;float:left;margin: auto;">
+        <div style="margin-left:auto;margin-right:auto;display:block;">
+          <div style="width:150px;float:left;margin: auto;">
             <img src="images/chromelens.png" style="width:100px;height:100px;"/>
-            </div>
+          </div>
 
-                <div>
+          <div>
             <h1 id="project_title">ChromeLens</h1>
-          <h2 id="project_tagline">Seeing your site from the eyes of the vision impaired</h2>
+            <h2 id="project_tagline">Chrome DevTools extension to develop for the visually impaired</h2>
+          </div>
         </div>
-            <!--
-          <section id="downloads">
-            <a class="zip_download_link" href="#">Download this project as a .zip file</a>
-            <a class="tar_download_link" href="#">Download this project as a tar.gz file</a>
-          </section>
-          -->
-        </header>
+      </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-          <div style="margin-left:auto;margin-right:auto;display:block;height:300px;">
+          <div style="margin-left:auto;margin-right:auto;display:block;height:380px;">
             <div style="width:480px;float:left;margin: auto;">
-            <h1>What is ChromeLens</h1>
-
-            <p>More than 280 million people worldwide are visually impaired.
-              That means that 1 in 26 people who surf your website will not be able to see it as you do.
-              ChromeLens is a set of developer tools that allow developers to code websites better suited for the visually impaired.</p>
-
-            </div>
-            <div style="width:400px;float:right;margin: auto;">
-                <img src="images/chromelens1.png" style="width:360px">
-            </div>
-          </div>
-
-
-
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-                  <h1>Color Blindess</h1>
-
-                  <p>Browsing the internet is something that is natural and easy to us, but to many people who suffer from vision disabilities and problems,
-                      it can be a challenging, time consuming and frustrating process.
-                  </p>
-          </div>
-
-
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-              <img src="images/twittercb.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
-          </div>
-
-
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-              <h1>ChromeLens</h1>
-
-              <p>To help developers make their web pages friendly to the visually impaired, we created ChromeLens,
-                  an extension to Chrome that changes the look of web pages to reflect what they see.
+              <h1>What is ChromeLens?</h1>
+              <p>ChromeLens is a set of developer tools that allow developers to code websites better suited for the visually impaired.</p>
+              <p>The three tools that are currently available are:
+                <ul>
+                  <li> Filters to experience a website as a blind or colorblind person.  </li>
+                  <li> Scanners to audit the accessibility readiness of a website. </li>
+                  <li> Trackers to visually show the path of a tab/shift-tab navigation flow with the keyboard </li>
+                </ul>
               </p>
+
+              <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Download from the Chrome Store</a>
+              <br />
+            </div>
+            <img src="images/chromelens1.png" style="width:400px">
+          </div>
+
+          <div style="margin-left:auto;margin-right:auto;display:block;">
+            <h2>Why build Chromelens?</h2>
+
+            <p>More than <b>280 million people</b> worldwide are visually impaired. That means that 1 in 26 people who surf your website will not be able to see it as you do.</p>
+            
+            <p>We want to provide tools to developers to gain more insight into how well prepared their websites are with web accessibility.</p>
+            <h3>Color Blindness</h3>
+
+            <p>Browsing the internet is natural and easy for a lot of people, but to the millions of people who suffer from vision disabilities, it can be a challenging, time consuming and frustrating process.
+            </p>
+          </div>
+
+          <div style="margin-left:auto;margin-right:auto;display:block;">
+            <img src="images/twittercb.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
+          </div>
+
+
+          <div style="margin-left:auto;margin-right:auto;display:block;">
+            <p>To help developers make their web pages friendly to the visually impaired, we created ChromeLens,
+              an extension to Chrome that changes the look of web pages to reflect what they see.
+            </p>
           </div>
 
           <div style="margin-left:auto;margin-right:auto;display:block;">
@@ -88,9 +86,7 @@
 
                   <h2>Using ChromeLens</h2>
 
-                  <p>Install the ChromeLens extension by cloning our git repository and adding the project as an
-                      experimental extension. More details on how to do that can be found here:
-                      <a href="https://developer.chrome.com/extensions/experimental">https://developer.chrome.com/extensions/experimental</a>
+                  <p>Install the ChromeLens extension by cloning our git repository (<a href="https://github.com/jin/chromelens">GitHub Link</a>) or downloading from the <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Chrome Store</a> and adding the project as an experimental extension. More details on experimental extensions can be found in the following link: <a href="https://developer.chrome.com/extensions/experimental">https://developer.chrome.com/extensions/experimental</a>
                   </p>
               </div>
               <div style="width:280px;float:right;margin: auto;">
