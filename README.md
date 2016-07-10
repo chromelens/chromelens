@@ -1,5 +1,7 @@
 # ChromeLens
 
+<a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Chrome Web Store</a>
+
 ChromeLens is a Google Chrome extension that provides a suite of tools to help
 with web accessibility development.
 
