@@ -1,5 +1,3 @@
-console.log('content script loaded')
-
 delete document.body.style.filter;
 delete document.body.style.webkitFilter;
 

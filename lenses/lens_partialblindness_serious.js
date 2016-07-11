@@ -1,5 +1,3 @@
-console.log('content script loaded')
-
 document.body.style.filter = "blur(10px)";
 document.body.style.webkitFilter = "blur(10px)";
 

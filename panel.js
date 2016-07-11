@@ -155,7 +155,6 @@ const addEventListeners = () => {
     const { options, selectedIndex } = lensSelector;
     const { value } = options[selectedIndex];
     const lens = lensType[value.toUpperCase()];
-    log(lens);
     return lens;
   }
   const setSelectedLens = () => lensEnabledCheckbox.checked ?
@@ -186,7 +185,6 @@ const addEventListeners = () => {
   const pngTabPathButton = document.getElementById('pngTabPath');
 
   traceTabPathButton.onclick = function() {
-    log('clicked')
     chrome.runtime.sendMessage({
       type: messageType.TRACE_TAB_PATH,
       data: {

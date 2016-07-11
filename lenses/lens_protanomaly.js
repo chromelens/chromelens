@@ -1,5 +1,3 @@
-console.log('content script loaded')
-
 var iDiv = document.createElement('div');
 iDiv.id = 'colorFilters';
 iDiv.innerHTML = '<svg id="colorFilterSVG" version="1.1" xmlns="http://www.w3.org/2000/svg" baseProfile="full"> ' +
