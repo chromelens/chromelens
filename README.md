@@ -1,4 +1,4 @@
-# ChromeLens
+# ![alt text](https://raw.githubusercontent.com/jin/chromelens/master/images/logo.png "ChromeLens Logo")
 
 <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Chrome Web Store</a>
 
