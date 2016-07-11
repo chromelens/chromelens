@@ -19,3 +19,7 @@ elements in your website that do not comply with them.
 Key website features should be navigable solely via the keyboard (tab button),
 while not making the user jump through hoops to get to a feature. With the
 tab-tracker, you can visually track the flow of navigation through a website.
+
+### Credits
+- https://github.com/GoogleChrome/accessibility-developer-tools
+- https://github.com/niklasvh/html2canvas
