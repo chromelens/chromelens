@@ -18,10 +18,8 @@
       <header class="inner">
         <a id="forkme_banner" href="https://github.com/chromelens/chromelens">View on GitHub</a>
 
-        <div style="margin-left:auto;margin-right:auto;display:block;">
-          <div style="width:150px;float:left;margin: auto;">
-            <img src="images/chromelens.png" style="width:100px;height:100px;"/>
-          </div>
+        <div>
+            <!-- <img src="images/chromelens.png" alt="ChromeLens logo" style="width:100px;height:100px;"/> -->
 
           <div>
             <h1 id="project_title">ChromeLens</h1>
@@ -39,25 +37,28 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-          <div style="margin-left:auto;margin-right:auto;display:block;height:380px;">
-            <div style="width:480px;float:left;margin: auto;">
+          <div class="row">
+            <div class="half-width" style="">
               <h1>What is ChromeLens?</h1>
               <p>ChromeLens is a set of developer tools that allow developers to code websites better suited for the visually impaired.</p>
-              <p>The three tools that are currently available are:
+              <p>The three tools that are currently available are:</p>
                 <ul>
                   <li> Filters to experience a website as a blind or colorblind person.  </li>
                   <li> Scanners to audit the accessibility readiness of a website. </li>
                   <li> Trackers to visually show the path of a tab/shift-tab navigation flow with the keyboard </li>
                 </ul>
-              </p>
 
-              <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Download from the Chrome Store</a>
-              <br />
+                <p>
+                <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Download from the Chrome Store</a>
+              </p>
             </div>
-            <img src="images/chromelens1.png" style="width:400px">
+
+            <div id="chromelens1" class="half-width">
+              <img src="images/chromelens1.png" style="width:400px" alt="ChromeLens logo">
+            </div>
           </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
+          <div class="row">
             <h2>Why build Chromelens?</h2>
 
             <p>More than <b>280 million people</b> worldwide are visually impaired. That means that 1 in 26 people who surf your website will not be able to see it as you do.</p>
@@ -67,43 +68,37 @@
 
             <p>Browsing the internet is natural and easy for a lot of people, but to the millions of people who suffer from vision disabilities, it can be a challenging, time consuming and frustrating process.
             </p>
-          </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-            <img src="images/twittercb.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
-          </div>
+            <img src="images/twittercb.png" style="width:940px;" alt="Surfing Twitter as a visually impaired person">
 
-
-          <div style="margin-left:auto;margin-right:auto;display:block;">
             <p>To help developers make their web pages friendly to the visually impaired, we created ChromeLens,
               an extension to Chrome that changes the look of web pages to reflect what they see.
             </p>
+
+            <p>The image on the right is what individuals with protanopia sees when looking at the image on the left.</p>
+
+            <img src="images/protanopiatest.png" style="width:940px;" alt="Test for protanopia">
           </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-              <p>The image on the right is what individuals with protanopia sees when looking at the image on the left.</p>
-              <img src="images/protanopiatest.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
-          </div>
-
-
-          <div style="margin-left:auto;margin-right:auto;display:block;height:300px;">
-              <div style="width:620px;float:left;margin: auto;">
+          <div class="row">
+              <div class="three-quarter-width">
 
                   <h2>Using ChromeLens</h2>
 
                   <p>Install the ChromeLens extension by cloning our git repository (<a href="https://github.com/chromelens/chromelens">GitHub Link</a>) or downloading from the <a href="https://chrome.google.com/webstore/detail/chrome-lens/idikgljglpfilbhaboonnpnnincjhjkd">Chrome Store</a> and adding the project as an experimental extension. More details on experimental extensions can be found in the following link: <a href="https://developer.chrome.com/extensions/experimental">https://developer.chrome.com/extensions/experimental</a>
                   </p>
               </div>
-              <div style="width:280px;float:right;margin: auto;">
-                  <img src="images/chromelensdropdown.png" style="width:250px">
+              <div class="quarter-width">
+                  <img src="images/chromelensdropdown.png" style="width:250px" alt="ChromeLens dropdown in Chrome DevTools">
               </div>
           </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;height:480px;">
-              <div style="width:340px;float:left;margin: auto;">
-                  <img src="images/chromelensmain.png" style="width:320px">
+          <div class="row">
+              <div class="third-width">
+                  <img src="images/chromelensmain.png" style="width:300px" alt="ChromeLens colour filters">
               </div>
-              <div style="width:600px;float:right;margin: auto;">
+
+              <div class="two-third-width">
                   <h2>Filters</h2>
 
                   <p>By checking the 'Enable Lens' checkbox, you turn on the color filters for ChromeLens, letting you
@@ -111,12 +106,12 @@
               </div>
           </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
+          <div class="row">
               <p>With the filters on, now you can browse your website as how a color blind person sees it.</p>
-              <img src="images/website_protanopia.png"style="width:960px;margin-left:auto;margin-right:auto;display:block;">
+              <img src="images/website_protanopia.png" style="width:940px" alt="ChromeLens homepage as seen by someone with protanopia">
           </div>
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
+          <div class="row">
               <div>
                   <h2>Scanner</h2>
 
@@ -124,7 +119,7 @@
                   </p>
 
           </div>
-              <img src="images/website_accessiblity.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
+              <img src="images/website_accessiblity.png" style="width:940px" alt="Running ChromeLens scanner on a webpage">
           </div>
 
         <h2>Tracker</h2>
@@ -132,128 +127,9 @@
         <p>ChromeLens Tracker is a blindness simulator that shows the pathway by which a blind user will go through when browsing your web page with a screen reader. You can check if your web page goes through a logical flow and that the important content is included for the screen reader to narrate.</p>
 
 
-          <div style="margin-left:auto;margin-right:auto;display:block;">
-              <img src="images/website_trace.png" style="width:960px;margin-left:auto;margin-right:auto;display:block;">
+          <div>
+              <img src="images/website_trace.png" style="width:940px;" alt="Running ChromeLens tracer on a webpage">
           </div>
-
-          <!--
-        <h5>Headline 5</h5>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <h6>Headline 6</h6>
-
-        <p>Lorem ipsizzle funky fresh i'm in the shizzle boom shackalack, consectetizzle adipiscing my shizz. Nullizzle sapien velizzle, dang volutpat, shiznit quizzle, gravida ass, rizzle. Pot get down get down tortor. Sed erizzle. Black go to hizzle dolizzle dapibizzle turpis fo shizzle my nizzle yo. Maurizzle pellentesque nibh et check it out. Bow wow wow check it out tortizzle. Pellentesque for sure rhoncizzle bow wow wow. In owned habitasse brizzle dictumst. Nizzle dapibizzle. Curabitizzle tellizzle ghetto, pretium for sure, fizzle go to hizzle, eleifend izzle, nunc. Dope suscipizzle. Integizzle boom shackalack velit ass purus.</p>
-
-        <p>Roses are <em>emphasized</em></br>
-        Violets are <strong>strong</strong></p>
-
-        <h3>We all like making lists</h3>
-
-        <ul>
-          <li>Red Apples</li>
-          <li>Purple Grapes</li>
-          <li>Green Kiwifruits</li>
-        </ul>
-
-        <p>Let's get crazy:</p>
-
-        <ol>
-          <li>
-            <p>This is a list item with two paragraphs. Lorem ipsum dolor
-            sit amet, consectetuer adipiscing elit. Aliquam hendrerit
-            mi posuere lectus.</p>
-
-            <p>Vestibulum enim wisi, viverra nec, fringilla in, laoreet
-            vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
-            sit amet velit.</p>
-          </li>
-          <li><p>Suspendisse id sem consectetuer libero luctus adipiscing.</p></li>
-        </ol>
-
-        <p>What about some code <strong>in</strong> a list? That's insane, right?</p>
-
-        <ol>
-          <li>
-            <p>In Ruby you can map like this:</p>
-              <code>['a', 'b'].map { |x| x.uppercase }</code>
-          </li>
-          <li>
-            <p>In Rails, you can do a shortcut:</p>
-              <code>['a', 'b'].map(&amp;:uppercase)</code>
-          </li>
-        </ol>
-
-        <p>Some people seem to like definition lists</p>
-
-        <dl>
-        <dt>Lower cost</dt>
-          <dd>The new version of this product costs significantly less than the previous one!</dd>
-          <dt>Easier to use</dt>
-          <dd>We've changed the product so that it's much easier to use!</dd>
-        </dl>
-
-        <h3>I am a robot</h3>
-
-        <p>Maybe you want to print <code>robot</code> to the console 1000 times. Why not?</p>
-<pre>
-def robot_invasion
-puts("robot " * 1000)
-end
-</pre>
-
-<p>How about we throw some angle braces and ampersands in there?</p>
-
-<pre><code>
-&lt;div class="footer"&gt;
-&amp;copy; 2013 Zorg Industries
-&lt;/div&gt;
-</code></pre>
-
-        <h3>If you need to blame someone, the best way to do so is by quoting them:</h3>
-
-        <blockquote>
-        <p>I, at any rate, am convinced that He does not throw dice.</p>
-        </blockquote>
-
-        <p>Or perhaps someone a little less eloquent:</p>
-
-        <blockquote>
-        <p>I wish you'd have given me this written question ahead of time so I
-        could plan for it... I'm sure something will pop into my head here in
-        the midst of this press conference, with all the pressure of trying to
-        come up with answer, but it hadn't yet...</p>
-
-        <p>I don't want to sound like
-        I have made no mistakes. I'm confident I have. I just haven't - you
-        just put me under the spot here, and maybe I'm not as quick on my feet
-        as I should be in coming up with one.</p>
-        </blockquote>
-
-        <h2>An octocat appears!</h2>
-        <img alt="an octocat!" src="http://octodex.github.com/images/octocat-de-los-muertos.jpg" />
-        <p>My favorite octocat, illustrated by <a href="https://github.com/cameronmcefee">@cameronmceffee</a>.</p>
-
-        <h2>Table for two</h2>
-
-        <table>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Rank</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>Tom Preston-Werner</td>
-          <td>Awesome</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Albert Einstein</td>
-          <td>Nearly as awesome</td>
-        </tr>
-        </table>
-        -->
       </section>
     </div>
 

@@ -65,6 +65,10 @@ p {
   margin: 10px 0 15px 0;
 }
 
+li {
+  font-size: 17px;
+}
+
 footer p {
   color: #f2f2f2;
 }
@@ -90,29 +94,29 @@ strong {
   font-weight: bold;
 }
 
-img {
-  position: relative;
-  margin: 0 auto;
-  max-width: 739px;
-  padding: 5px;
-  margin: 10px 0 10px 0;
-  border: 1px solid #ebebeb;
+/* img { */
+/*   position: relative; */
+/*   margin: 0 auto; */
+/*   max-width: 739px; */
+/*   padding: 5px; */
+/*   margin: 10px 0 10px 0; */
+/*   border: 1px solid #ebebeb; */
 
-  box-shadow: 0 0 5px #ebebeb;
-  -webkit-box-shadow: 0 0 5px #ebebeb;
-  -moz-box-shadow: 0 0 5px #ebebeb;
-  -o-box-shadow: 0 0 5px #ebebeb;
-  -ms-box-shadow: 0 0 5px #ebebeb;
-}
+/*   box-shadow: 0 0 5px #ebebeb; */
+/*   -webkit-box-shadow: 0 0 5px #ebebeb; */
+/*   -moz-box-shadow: 0 0 5px #ebebeb; */
+/*   -o-box-shadow: 0 0 5px #ebebeb; */
+/*   -ms-box-shadow: 0 0 5px #ebebeb; */
+/* } */
 
-p img {
-  display: inline;
-  margin: 0;
-  padding: 0;
-  vertical-align: middle;
-  text-align: center;
-  border: none;
-}
+/* p img { */
+/*   display: inline; */
+/*   margin: 0; */
+/*   padding: 0; */
+/*   vertical-align: middle; */
+/*   text-align: center; */
+/*   border: none; */
+/* } */
 
 pre, code {
   width: 100%;
@@ -309,15 +313,53 @@ Full-Width Styles
   background: #212121;
 }
 
+.row {
+  clear: both;
+}
+
+.half-width,
+.third-width,
+.two-third-width,
+.quarter-width,
+.three-quarter-width {
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .half-width {
+    float: left;
+    width: 50%;
+    vertical-align: top;
+  }
+
+  .third-width {
+    width: 33.33333%;
+    float: left;
+  }
+
+  .two-third-width {
+    width: 66.66666%;
+    float: left;
+  }
+
+  .quarter-width {
+    float: left;
+    width: 25%;
+    vertical-align: top;
+  }
+
+  .three-quarter-width {
+    float: left;
+    width: 75%;
+    vertical-align: top;
+  }
+}
+
 /*******************************************************************************
 Small Device Styles
 *******************************************************************************/
 
 @media screen and (max-width: 480px) {
-  body {
-    font-size:14px;
-  }
-
   #downloads {
     display: none;
   }
@@ -359,5 +401,9 @@ Small Device Styles
     min-width: 320px;
     max-width: 480px;
     font-size: 11px;
+  }
+
+  #chromelens1 {
+    display: none;
   }
 }
