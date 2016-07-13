@@ -94,6 +94,9 @@ strong {
   font-weight: bold;
 }
 
+img {
+max-width: 100%;
+}
 /* img { */
 /*   position: relative; */
 /*   margin: 0 auto; */
