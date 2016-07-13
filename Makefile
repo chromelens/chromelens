@@ -1,7 +1,8 @@
 all: build
 
 clean:
-	rm chromelens.zip
+	rm -rf build/
 
 build:
-	zip -r chromelens.zip . -x *.git* \*.crx \*.zip CNAME Makefile images/* */.DS_Store
+	mkdir -p build
+	zip -r build/chromelens.crx . -x *.git* CNAME Makefile images/* */.DS_Store
