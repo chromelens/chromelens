@@ -315,6 +315,7 @@ Full-Width Styles
 
 .row {
   clear: both;
+  width: 100%;
 }
 
 .half-width,
@@ -353,6 +354,17 @@ Full-Width Styles
     width: 75%;
     vertical-align: top;
   }
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+#logo-text {
+  display: inline-block;
 }
 
 /*******************************************************************************
