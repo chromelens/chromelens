@@ -19,7 +19,6 @@
   },
 
   "permissions": [
-    "file:///*",
     "http://*/*",
     "https://*/*",
     "tabs"
