@@ -11,7 +11,8 @@ const messageType = {
   HIGHLIGHT_WARNING: 'HIGHLIGHT_WARNING',
   UNHIGHLIGHT_WARNING: 'UNHIGHLIGHT_WARNING',
   TRACE_TAB_PATH: 'TRACE_TAB_PATH',
-  PNG_TAB_PATH: 'PNG_TAB_PATH'
+  PNG_TAB_PATH: 'PNG_TAB_PATH',
+  CLEAR_AXS: 'CLEAR_AXS'
 }
 const lensType = {
   ACHROMATOMALY: {
@@ -172,6 +173,7 @@ const addEventListeners = () => {
   chrome.devtools.network.onNavigated.addListener(setSelectedLens);
 
   const runAxsButton = document.getElementById('runAxs');
+  const clearAxsButton = document.getElementById('clearAxs');
   runAxsButton.onclick = function() {
     chrome.runtime.sendMessage({
       type: messageType.RUN_AXS,
@@ -179,7 +181,20 @@ const addEventListeners = () => {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
     })
+    clearAxsButton.style.visibility = null;
   };
+
+  clearAxsButton.onclick = function() {
+    chrome.runtime.sendMessage({
+      type: messageType.CLEAR_AXS,
+      data: {
+        tabId: chrome.devtools.inspectedWindow.tabId
+      }
+    })
+    const resultRoot = document.querySelector('#axs-results');
+    resultRoot.children[0].remove()
+    clearAxsButton.style.visibility = 'hidden';
+  }
 
   const traceTabPathButton = document.getElementById('traceTabPath');
   const pngTabPathButton = document.getElementById('pngTabPath');
@@ -219,6 +234,8 @@ function severityNode(severity) {
 
 function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
+  const ul = document.createElement('ul')
+  resultRoot.appendChild(ul)
   for (i in idToWarningsMap) {
     var div = document.createElement('li');
     div.classList.add('result-line');
@@ -238,7 +255,7 @@ function showAxsResults(idToWarningsMap) {
 
     div.appendChild(document.createTextNode(' '));
     div.appendChild(link);
-    resultRoot.appendChild(div);
+    ul.appendChild(div);
   }
 
   for (let i in idToWarningsMap) {

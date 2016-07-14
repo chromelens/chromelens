@@ -43,18 +43,18 @@ var CHROME_LENS_BASE_ID = 'chrome-lens-base'
 var CHROME_LENS_WARNING_CLASS = 'chrome-lens-warning'
 
 function initDom() {
-  if (document.querySelector('#' + CHROME_LENS_STYLE_ID)) return;
+  if (!document.getElementById(CHROME_LENS_STYLE_ID)) {
+    const style = document.createElement('style');
+    style.id = CHROME_LENS_STYLE_ID;
+    style.innerHTML = STYLE;
+    document.head.appendChild(style)
+  }
 
-  const style = document.createElement('style');
-  style.id = CHROME_LENS_STYLE_ID;
-  style.innerHTML = STYLE;
-  document.head.appendChild(style)
-
-  if (document.querySelector('#' + CHROME_LENS_BASE_ID)) return;
-
-  const div = document.createElement('div');
-  div.id = CHROME_LENS_BASE_ID;
-  document.body.appendChild(div);
+  if (!document.getElementById(CHROME_LENS_BASE_ID)) {
+    const div = document.createElement('div');
+    div.id = CHROME_LENS_BASE_ID;
+    document.body.appendChild(div);
+  }
 }
 
 function tooltipHeader(severity, code, url) {
@@ -192,8 +192,6 @@ run_result.forEach(function(v) {
     highlightElementForRuleViolation(el, v.rule);
   })
 })
-// console.log(run_result);
-console.log(idToWarningsMap);
 
 chrome.runtime.sendMessage({
   type: 'AXS_COMPLETE',

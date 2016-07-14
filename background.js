@@ -7,7 +7,8 @@ const messageType = {
   HIGHLIGHT_REPORT: 'HIGHLIGHT_REPORT',
   UNHIGHLIGHT_REPORT: 'UNHIGHLIGHT_REPORT',
   TRACE_TAB_PATH: 'TRACE_TAB_PATH',
-  PNG_TAB_PATH: 'PNG_TAB_PATH'
+  PNG_TAB_PATH: 'PNG_TAB_PATH',
+  CLEAR_AXS: 'CLEAR_AXS'
 }
 
 const AXS_TESTING = 'axs_testing.js'
@@ -25,6 +26,11 @@ const devToolsListener = function(message, sender, sendResponse) {
       const { tabId } = message.data;
       chrome.tabs.executeScript(tabId, { file: AXS_TESTING });
       chrome.tabs.executeScript(tabId, { file: 'run_axs.js' });
+      break;
+    }
+    case messageType.CLEAR_AXS: {
+      const { tabId } = message.data;
+      chrome.tabs.executeScript(tabId, { code: 'document.getElementById("chrome-lens-base").remove()'})
       break;
     }
     case messageType.AXS_COMPLETE: {
