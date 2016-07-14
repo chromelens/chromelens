@@ -5,4 +5,4 @@ clean:
 
 build:
 	mkdir -p build
-	zip -r build/chromelens.crx . -x *.git* CNAME Makefile images/* */.DS_Store
+	zip -r build/chromelens.crx . -x *.git* CNAME Makefile images/ images/* */.DS_Store build/
