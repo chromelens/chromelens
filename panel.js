@@ -191,8 +191,8 @@ const addEventListeners = () => {
         tabId: chrome.devtools.inspectedWindow.tabId
       }
     })
-    const resultRoot = document.querySelector('#axs-results');
-    resultRoot.children[0].remove()
+    const resultRoot = document.getElementById('axs-results');
+    removeChildren(resultRoot);
     clearAxsButton.style.visibility = 'hidden';
   }
 
@@ -225,6 +225,13 @@ const addEventListeners = () => {
     document.head.appendChild(hideSVG);`);
 }
 
+function removeChildren(el) {
+  if (!el) { return; }
+  while (el.children.length > 0) {
+    el.children[0].remove()
+  }
+}
+
 function severityNode(severity) {
   var span = document.createElement('span');
   span.classList.add( severity.toLowerCase());
@@ -234,6 +241,7 @@ function severityNode(severity) {
 
 function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
+  removeChildren(resultRoot);
   const ul = document.createElement('ul')
   resultRoot.appendChild(ul)
   for (i in idToWarningsMap) {

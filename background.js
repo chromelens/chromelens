@@ -30,7 +30,7 @@ const devToolsListener = function(message, sender, sendResponse) {
     }
     case messageType.CLEAR_AXS: {
       const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { code: 'document.getElementById("chrome-lens-base").remove()'})
+      chrome.tabs.executeScript(tabId, { file: 'clear_axs.js'})
       break;
     }
     case messageType.AXS_COMPLETE: {

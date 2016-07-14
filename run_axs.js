@@ -1,5 +1,7 @@
 var BASE_Z = 999999;
+var WARNING_COUNT = 0;
 var TOOLTIP_Z = BASE_Z + 1;
+var idToWarningsMap = {}
 var STYLE = `
   #chrome-lens-base {
     position: absolute;
@@ -179,27 +181,31 @@ function highlightElementForRuleViolation(el, rule_violated) {
   positionTooltip(tooltipText, top, left, height);
 }
 
-var run_result = axs.Audit.run();
-initDom()
-var idToWarningsMap = {}
-var WARNING_COUNT = 0;
+function run() {
+  if (document.getElementById(CHROME_LENS_BASE_ID)) { return; }
 
-run_result.forEach(function(v) {
-  // we only want to highlight failures
-  if (v.result !== 'FAIL') { return; }
+  var run_result = axs.Audit.run();
+  initDom()
 
-  v.elements.forEach(function(el) {
-    highlightElementForRuleViolation(el, v.rule);
+  run_result.forEach(function(v) {
+    // we only want to highlight failures
+    if (v.result !== 'FAIL') { return; }
+
+    v.elements.forEach(function(el) {
+      highlightElementForRuleViolation(el, v.rule);
+    })
   })
-})
 
-chrome.runtime.sendMessage({
-  type: 'AXS_COMPLETE',
-  data: {
-    result: run_result,
-    idToWarningsMap: idToWarningsMap
-  }
-})
+  chrome.runtime.sendMessage({
+    type: 'AXS_COMPLETE',
+    data: {
+      result: run_result,
+      idToWarningsMap: idToWarningsMap
+    }
+  })
+}
+
+run();
 
 chrome.runtime.onMessage.addListener(function(message) {
   switch (message.type) {
