@@ -1,41 +1,42 @@
 var BASE_Z = 999999;
 var TOOLTIP_Z = BASE_Z + 1;
-var STYLE =
-  '#chrome-lens-base {' +
-  '  position: absolute;' +
-  '  top: 0;' +
-  '  left: 0;' +
-  '  z-index: ' + BASE_Z + ';' +
-  '}' +
-  '.chrome-lens-warning {' +
-  '  position: absolute;' +
-  '  box-shadow: 0 0 4px 4px #f7983a;' +
-  '  border-radius: 2px;' +
-  '}' +
-  '.tooltip .tooltip-text {' +
-  '  visibility: hidden;' +
-  '  display: inline-block;' +
-  '  background-color: #fffdfd;' +
-  '  color: #212121;' +
-  '  position: absolute;' +
-  '  max-width: 300px;' +
-  '  min-width: 200px;' +
-  '  padding: 0px 10px 5px 10px;' +
-  '  border-radius: 2px;' +
-  '  border: 1px solid black;' +
-  '  z-index: ' + TOOLTIP_Z + ';' +
-  '}' +
-  '.tooltip .tooltip-text .severe {' +
-  '  color: #c10f0f;' +
-  '  font-weight: 900;' +
-  '}' +
-  '.tooltip .tooltip-text .warning {' +
-  '  color: #e69808;' +
-  '  font-weight: 700;' +
-  '}' +
-  '.tooltip:hover .tooltip-text {' +
-  '  visibility: visible;' +
-  '}';
+var STYLE = `
+  #chrome-lens-base {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: ${BASE_Z};
+  }
+  .chrome-lens-warning {
+    position: absolute;
+    box-shadow: 0 0 4px 4px #f7983a;
+    border-radius: 2px;
+  }
+  .tooltip .tooltip-text {
+    visibility: hidden;
+    display: inline-block;
+    background-color: #fffdfd;
+    color: #212121;
+    position: absolute;
+    max-width: 300px;
+    min-width: 200px;
+    padding: 0px 10px 5px 10px;
+    border-radius: 2px;
+    border: 1px solid black;
+    z-index: ${TOOLTIP_Z};
+  }
+  .tooltip .tooltip-text .severe {
+    color: #c10f0f;
+    font-weight: 900;
+  }
+  .tooltip .tooltip-text .warning {
+    color: #e69808;
+    font-weight: 700;
+  }
+  .tooltip:hover .tooltip-text {
+    visibility: visible;
+  }
+`;
 
 var CHROME_LENS_STYLE_ID = 'chrome-lens-style'
 var CHROME_LENS_BASE_ID = 'chrome-lens-base'
