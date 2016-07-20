@@ -12,7 +12,6 @@ const messageType = {
 }
 
 const auditDir = 'audit';
-const lensesDir = 'lenses';
 const tracerDir = 'tracer';
 
 var devtools = null;
