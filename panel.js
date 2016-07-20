@@ -14,6 +14,7 @@ const messageType = {
   PNG_TAB_PATH: 'PNG_TAB_PATH',
   CLEAR_AXS: 'CLEAR_AXS'
 }
+
 const lensType = {
   ACHROMATOMALY: {
     name: 'Achromatomaly',
@@ -116,7 +117,7 @@ const lensType = {
 }
 
 // Global state
-const lensDir = 'lenses/';
+const lensDir = 'lenses/filters/';
 
 const changeLens = (lens) => {
   // Remove any lens div
