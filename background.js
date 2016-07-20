@@ -11,7 +11,10 @@ const messageType = {
   CLEAR_AXS: 'CLEAR_AXS'
 }
 
-const AXS_TESTING = 'axs_testing.js'
+const auditDir = 'audit';
+const lensesDir = 'lenses';
+const tracerDir = 'tracer';
+
 var devtools = null;
 
 const devToolsListener = function(message, sender, sendResponse) {
@@ -24,13 +27,13 @@ const devToolsListener = function(message, sender, sendResponse) {
     }
     case messageType.RUN_AXS: {
       const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: AXS_TESTING });
-      chrome.tabs.executeScript(tabId, { file: 'run_axs.js' });
+      chrome.tabs.executeScript(tabId, { file: `${auditDir}/axs_testing.js` });
+      chrome.tabs.executeScript(tabId, { file: `${auditDir}/run_axs.js` });
       break;
     }
     case messageType.CLEAR_AXS: {
       const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: 'clear_axs.js'})
+      chrome.tabs.executeScript(tabId, { file: `${auditDir}/clear_axs.js`})
       break;
     }
     case messageType.AXS_COMPLETE: {
@@ -91,13 +94,13 @@ const devToolsListener = function(message, sender, sendResponse) {
     }
     case messageType.TRACE_TAB_PATH: {
       const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: 'trace_tab_path.js' });
+      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/trace_tab_path.js` });
       break;
     }
     case messageType.PNG_TAB_PATH: {
       const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: 'html2canvas.js' });
-      chrome.tabs.executeScript(tabId, { file: 'png_tab_path.js' });
+      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/html2canvas.js` });
+      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/png_tab_path.js` });
       break;
     }
     default: {
