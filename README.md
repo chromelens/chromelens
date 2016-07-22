@@ -20,6 +20,10 @@ Key website features should be navigable solely via the keyboard (tab button),
 while not making the user jump through hoops to get to a feature. With the
 tab-tracker, you can visually track the flow of navigation through a website.
 
+### Website
+
+Find out more about ChromeLens, why we made it, and more about the extension at <a href="http://chromelens.xyz">chromelens.xyz</a>
+
 ### Credits
 - https://github.com/GoogleChrome/accessibility-developer-tools
 - https://github.com/niklasvh/html2canvas
