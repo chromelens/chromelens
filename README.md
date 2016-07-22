@@ -23,3 +23,8 @@ tab-tracker, you can visually track the flow of navigation through a website.
 ### Credits
 - https://github.com/GoogleChrome/accessibility-developer-tools
 - https://github.com/niklasvh/html2canvas
+- https://github.com/Altreus/colourblind
+
+### Reviews for ChromeLens
+- http://briancoords.com/tech/analyzing-accessibility-chromelens/
+- http://www.jaredrigby.co.uk/2016/07/11/accessibility-testing-with-chromelens.html
