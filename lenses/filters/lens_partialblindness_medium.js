@@ -14,7 +14,7 @@ var styles = `
 `
 
 var iDiv = document.createElement('div');
-iDiv.id = 'colorFilters';
+iDiv.id = 'chromelens-colorFilters';
 iDiv.innerHTML = `<div style="${styles}"></div>`;
 
 document.body.appendChild(iDiv);

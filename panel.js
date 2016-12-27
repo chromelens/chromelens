@@ -218,12 +218,6 @@ const addEventListeners = () => {
       }
     })
   };
-
-  // Hide the SVG element used for colour filter
-  chrome.devtools.inspectedWindow.eval(`
-    var hideSVG = document.createElement("style");
-    hideSVG.innerHTML = "#colorFilterSVG { display: none; }";
-    document.head.appendChild(hideSVG);`);
 }
 
 function removeChildren(el) {
