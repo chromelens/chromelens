@@ -103,19 +103,19 @@ function tooltipTextNode(rule_violated) {
 }
 
 function getCoordinates(elem) {
-    var box = elem.getBoundingClientRect();
-    var body = document.body;
-    var docEl = document.documentElement;
+  var box = elem.getBoundingClientRect();
+  var body = document.body;
+  var docEl = document.documentElement;
 
-    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+  var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+  var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
 
-    var clientTop = docEl.clientTop || body.clientTop || 0;
-    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+  var clientTop = docEl.clientTop || body.clientTop || 0;
+  var clientLeft = docEl.clientLeft || body.clientLeft || 0;
 
-    var top  = box.top +  scrollTop - clientTop;
-    var left = box.left + scrollLeft - clientLeft;
-    return { top, left, height: box.height, width: box.width }
+  var top  = box.top +  scrollTop - clientTop;
+  var left = box.left + scrollLeft - clientLeft;
+  return { top, left, height: box.height, width: box.width }
 }
 
 function tooltipNode(offendingEl) {
@@ -157,7 +157,7 @@ function suggestFix(ruleViolated) {
   }
 }
 
-function highlightElementForRuleViolation(el, rule_violated) {
+function highlightElementForRuleViolation(frag, el, rule_violated) {
   const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
   idToWarningsMap[warningId] = {el: el, rule: rule_violated}
 
@@ -170,8 +170,7 @@ function highlightElementForRuleViolation(el, rule_violated) {
   const toolTip = tooltipNode(el);
   toolTip.appendChild(tooltipText);
 
-  const base = document.getElementById(CHROME_LENS_BASE_ID).shadowRoot;
-  base.appendChild(toolTip);
+  frag.appendChild(toolTip);
   // we can only position after we append, because tooltipText has no
   // bounding client rect before it gets added to the DOM
   positionTooltip(tooltipText, top, left, height);
@@ -183,14 +182,19 @@ function run() {
   var run_result = axs.Audit.run();
   initDom()
 
+  var frag = document.createDocumentFragment();
+
   run_result.forEach(function(v) {
     // we only want to highlight failures
     if (v.result !== 'FAIL') { return; }
 
     v.elements.forEach(function(el) {
-      highlightElementForRuleViolation(el, v.rule);
+      highlightElementForRuleViolation(frag, el, v.rule);
     })
   })
+
+  var root = document.getElementById(CHROME_LENS_BASE_ID).shadowRoot;
+  root.appendChild(frag);
 
   chrome.runtime.sendMessage({
     type: 'AXS_COMPLETE',
