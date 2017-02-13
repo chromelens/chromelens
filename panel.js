@@ -218,12 +218,6 @@ const addEventListeners = () => {
       }
     })
   };
-
-  // Hide the SVG element used for colour filter
-  chrome.devtools.inspectedWindow.eval(`
-    var hideSVG = document.createElement("style");
-    hideSVG.innerHTML = "#colorFilterSVG { display: none; }";
-    document.head.appendChild(hideSVG);`);
 }
 
 function removeChildren(el) {
@@ -243,8 +237,7 @@ function severityNode(severity) {
 function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
   removeChildren(resultRoot);
-  const ul = document.createElement('ul')
-  resultRoot.appendChild(ul)
+  const ul = document.createElement('ul');
   for (i in idToWarningsMap) {
     var div = document.createElement('li');
     div.classList.add('result-line');
@@ -264,13 +257,9 @@ function showAxsResults(idToWarningsMap) {
 
     div.appendChild(document.createTextNode(' '));
     div.appendChild(link);
-    ul.appendChild(div);
-  }
 
-  for (let i in idToWarningsMap) {
-    const warning = document.getElementById(i);
-    warning.onmouseover = function() {
-      _highlight(warning);
+    div.onmouseover = function() {
+      _highlight(this);
       chrome.runtime.sendMessage({
         type: messageType.HIGHLIGHT_WARNING,
         data: {
@@ -278,9 +267,9 @@ function showAxsResults(idToWarningsMap) {
           warningId: i
         }
       });
-    }
-    warning.onmouseout = function() {
-      _unhighlight(warning);
+    };
+    div.onmouseout = function() {
+      _unhighlight(this);
       chrome.runtime.sendMessage({
         type: messageType.UNHIGHLIGHT_WARNING,
         data: {
@@ -288,8 +277,12 @@ function showAxsResults(idToWarningsMap) {
           warningId: i
         }
       });
-    }
+    };
+  
+    ul.appendChild(div);
   }
+
+  resultRoot.appendChild(ul);
 }
 
 function highlightReportLine(warningId) {

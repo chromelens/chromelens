@@ -1,9 +1,11 @@
-var BASE_Z = 999999;
+const BASE_Z = 999999;
 var WARNING_COUNT = 0;
-var TOOLTIP_Z = BASE_Z + 1;
-var idToWarningsMap = {}
-var STYLE = `
-  #chrome-lens-base {
+var idToWarningsMap = {};
+var STYLE = `<style>
+  :host {
+    all: initial;
+    contain: style layout size;
+    display: block;
     position: absolute;
     top: 0;
     left: 0;
@@ -25,7 +27,7 @@ var STYLE = `
     padding: 0px 10px 5px 10px;
     border-radius: 2px;
     border: 1px solid black;
-    z-index: ${TOOLTIP_Z};
+    z-index: ${BASE_Z+1};
   }
   .tooltip .tooltip-text .severe {
     color: #c10f0f;
@@ -38,23 +40,17 @@ var STYLE = `
   .tooltip:hover .tooltip-text {
     visibility: visible;
   }
-`;
+</style>`;
 
-var CHROME_LENS_STYLE_ID = 'chrome-lens-style'
 var CHROME_LENS_BASE_ID = 'chrome-lens-base'
 var CHROME_LENS_WARNING_CLASS = 'chrome-lens-warning'
 
 function initDom() {
-  if (!document.getElementById(CHROME_LENS_STYLE_ID)) {
-    const style = document.createElement('style');
-    style.id = CHROME_LENS_STYLE_ID;
-    style.innerHTML = STYLE;
-    document.head.appendChild(style)
-  }
-
   if (!document.getElementById(CHROME_LENS_BASE_ID)) {
     const div = document.createElement('div');
     div.id = CHROME_LENS_BASE_ID;
+    var root = div.attachShadow({mode: 'open'});
+    root.innerHTML = STYLE;
     document.body.appendChild(div);
   }
 }
@@ -107,19 +103,19 @@ function tooltipTextNode(rule_violated) {
 }
 
 function getCoordinates(elem) {
-    var box = elem.getBoundingClientRect();
-    var body = document.body;
-    var docEl = document.documentElement;
+  var box = elem.getBoundingClientRect();
+  var body = document.body;
+  var docEl = document.documentElement;
 
-    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+  var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+  var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
 
-    var clientTop = docEl.clientTop || body.clientTop || 0;
-    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+  var clientTop = docEl.clientTop || body.clientTop || 0;
+  var clientLeft = docEl.clientLeft || body.clientLeft || 0;
 
-    var top  = box.top +  scrollTop - clientTop;
-    var left = box.left + scrollLeft - clientLeft;
-    return { top, left, height: box.height, width: box.width }
+  var top  = box.top +  scrollTop - clientTop;
+  var left = box.left + scrollLeft - clientLeft;
+  return { top, left, height: box.height, width: box.width }
 }
 
 function tooltipNode(offendingEl) {
@@ -161,7 +157,7 @@ function suggestFix(ruleViolated) {
   }
 }
 
-function highlightElementForRuleViolation(el, rule_violated) {
+function highlightElementForRuleViolation(frag, el, rule_violated) {
   const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
   idToWarningsMap[warningId] = {el: el, rule: rule_violated}
 
@@ -174,8 +170,7 @@ function highlightElementForRuleViolation(el, rule_violated) {
   const toolTip = tooltipNode(el);
   toolTip.appendChild(tooltipText);
 
-  const base = document.querySelector('#' + CHROME_LENS_BASE_ID);
-  base.appendChild(toolTip);
+  frag.appendChild(toolTip);
   // we can only position after we append, because tooltipText has no
   // bounding client rect before it gets added to the DOM
   positionTooltip(tooltipText, top, left, height);
@@ -187,14 +182,19 @@ function run() {
   var run_result = axs.Audit.run();
   initDom()
 
+  var frag = document.createDocumentFragment();
+
   run_result.forEach(function(v) {
     // we only want to highlight failures
     if (v.result !== 'FAIL') { return; }
 
     v.elements.forEach(function(el) {
-      highlightElementForRuleViolation(el, v.rule);
+      highlightElementForRuleViolation(frag, el, v.rule);
     })
   })
+
+  var root = document.getElementById(CHROME_LENS_BASE_ID).shadowRoot;
+  root.appendChild(frag);
 
   chrome.runtime.sendMessage({
     type: 'AXS_COMPLETE',
