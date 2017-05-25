@@ -4,9 +4,21 @@ delete document.body.style.webkitFilter;
 var body = document.body,
     html = document.documentElement;
 
-var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+var height = Math.max(
+  body.scrollHeight,
+  body.offsetHeight,
+  html.clientHeight,
+  html.scrollHeight,
+  html.offsetHeight
+);
 
-var width = Math.max(body.scrollWidth, body.offsetWidth, html.clientWidth, html.scrollWidth, html.offsetWidth);
+var width = Math.max(
+  body.scrollWidth,
+  body.offsetWidth,
+  html.clientWidth,
+  html.scrollWidth,
+  html.offsetWidth
+);
 
 var canvas = document.createElement("canvas");
 canvas.id = 'chrome-lens-canvas';
