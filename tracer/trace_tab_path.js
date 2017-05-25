@@ -1,8 +1,41 @@
+// Delete any applied filters
 delete document.body.style.filter;
 delete document.body.style.webkitFilter;
 
-var body = document.body,
-    html = document.documentElement;
+var body = document.body;
+var html = document.documentElement;
+
+function drawLine(ctx, x, y) {
+  ctx.lineTo(x, y);
+  ctx.stroke();
+}
+
+function drawDot(ctx, x, y) {
+  ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
+  ctx.stroke();
+}
+
+function getCoordinates(elem) {
+    var box = elem.getBoundingClientRect();
+    var body = document.body;
+    var docEl = document.documentElement;
+    var halfWidth = box.width / 2;
+    var halfHeight = box.height / 2;
+
+    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+    var clientTop = docEl.clientTop || body.clientTop || 0;
+    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+    var top = box.top + scrollTop - clientTop;
+    var left = box.left + scrollLeft - clientLeft;
+
+  return {
+    top: Math.round(top + halfHeight),
+    left: Math.round(left + halfWidth)
+  };
+}
 
 var height = Math.max(
   body.scrollHeight,
@@ -31,12 +64,15 @@ canvas.style.position = 'absolute';
 canvas.style.zIndex = 2147483647;
 
 var ctx = canvas.getContext('2d');
+ctx.strokeStyle = 'red';
+ctx.lineWidth = 2;
+
 ctx.beginPath();
 ctx.moveTo(0, 0);
+
 if (document.activeElement !== document.body) {
   const { top: y, left: x } = getCoordinates(document.activeElement);
-  ctx.lineTo(x, y);
-  ctx.stroke();
+  drawLine(ctx, x, y);
 }
 
 document.body.appendChild(canvas);
@@ -46,30 +82,7 @@ document.body.onkeyup = function (e) {
     if (e.keyCode === 9) {
       // Tab
       const { top: y, left: x } = getCoordinates(e.target);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-      ctx.arc(x, y, 3, 0, 2 * Math.PI, false);
-      ctx.lineWidth = 2;
-      ctx.strokeStyle = 'red';
-      ctx.stroke();
+      drawLine(ctx, x, y);
+      drawDot(ctx, x, y);
     }
 };
-
-function getCoordinates(elem) { 
-    var box = elem.getBoundingClientRect();
-    var body = document.body;
-    var docEl = document.documentElement;
-    var halfWidth = box.width / 2;
-    var halfHeight = box.height / 2;
-
-    var scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    var scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-
-    var clientTop = docEl.clientTop || body.clientTop || 0;
-    var clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
-    var top  = box.top +  scrollTop - clientTop;
-    var left = box.left + scrollLeft - clientLeft;
-
-    return { top: Math.round(top + halfHeight), left: Math.round(left + halfWidth) };
-}
