@@ -278,7 +278,11 @@ function showAxsResults(idToWarningsMap) {
         }
       });
     };
-  
+    let evalString = `var node = document.querySelector("[chromelens-warning-id='${i}']"); inspect(node)`
+    div.onmousedown = function() {
+      chrome.devtools.inspectedWindow.eval(evalString)
+    };
+
     ul.appendChild(div);
   }
 
