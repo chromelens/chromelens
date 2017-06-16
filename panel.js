@@ -15,6 +15,8 @@ const messageType = {
   CLEAR_AXS: 'CLEAR_AXS'
 }
 
+const WARNING_ATTR_NAME = 'chromelens-warning-id';
+
 const lensType = {
   ACHROMATOMALY: {
     name: 'Achromatomaly',
@@ -278,7 +280,7 @@ function showAxsResults(idToWarningsMap) {
         }
       });
     };
-    let evalString = `var node = document.querySelector("[chromelens-warning-id='${i}']"); inspect(node)`
+    let evalString = `var node = document.querySelector("[${WARNING_ATTR_NAME}='${i}']"); inspect(node)`
     div.onmousedown = function() {
       chrome.devtools.inspectedWindow.eval(evalString)
     };
