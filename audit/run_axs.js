@@ -44,6 +44,7 @@ var STYLE = `<style>
 
 var CHROME_LENS_BASE_ID = 'chrome-lens-base'
 var CHROME_LENS_WARNING_CLASS = 'chrome-lens-warning'
+var WARNING_ATTR_NAME = 'chromelens-warning-id';
 
 function initDom() {
   if (!document.getElementById(CHROME_LENS_BASE_ID)) {
@@ -160,7 +161,7 @@ function suggestFix(ruleViolated) {
 function highlightElementForRuleViolation(frag, el, rule_violated) {
   const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
   idToWarningsMap[warningId] = {el: el, rule: rule_violated};
-  el.setAttribute('chromelens-warning-id', warningId);
+  el.setAttribute(WARNING_ATTR_NAME, warningId);
 
   const { top, left, height, width } = getCoordinates(el);
 
