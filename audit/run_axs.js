@@ -159,7 +159,8 @@ function suggestFix(ruleViolated) {
 
 function highlightElementForRuleViolation(frag, el, rule_violated) {
   const warningId = CHROME_LENS_WARNING_CLASS + '-' + (WARNING_COUNT++);
-  idToWarningsMap[warningId] = {el: el, rule: rule_violated}
+  idToWarningsMap[warningId] = {el: el, rule: rule_violated};
+  el.setAttribute('chromelens-warning-id', warningId);
 
   const { top, left, height, width } = getCoordinates(el);
 
