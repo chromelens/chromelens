@@ -1,4 +1,4 @@
-const BASE_Z = 999999;
+var BASE_Z = 999999;
 var WARNING_COUNT = 0;
 var idToWarningsMap = {};
 var STYLE = `<style>
