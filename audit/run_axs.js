@@ -179,17 +179,20 @@ function highlightElementForRuleViolation(frag, el, rule_violated) {
 }
 
 function run() {
-  if (document.getElementById(CHROME_LENS_BASE_ID)) { return; }
+  const base = document.getElementById(CHROME_LENS_BASE_ID);
+  if (base) {
+    base.remove()
+  }
 
   var run_result = axs.Audit.run();
   initDom()
 
   var frag = document.createDocumentFragment();
 
-  run_result.forEach(function(v) {
-    // we only want to highlight failures
-    if (v.result !== 'FAIL') { return; }
+  // we only want to highlight failures
+  const failures = run_result.filter(v => v.result === 'FAIL');
 
+  failures.forEach(function(v) {
     v.elements.forEach(function(el) {
       highlightElementForRuleViolation(frag, el, v.rule);
     })
@@ -201,8 +204,8 @@ function run() {
   chrome.runtime.sendMessage({
     type: 'AXS_COMPLETE',
     data: {
-      result: run_result,
-      idToWarningsMap: idToWarningsMap
+      result: failures,
+      idToWarningsMap,
     }
   })
 }

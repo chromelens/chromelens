@@ -239,6 +239,13 @@ function severityNode(severity) {
 function showAxsResults(idToWarningsMap) {
   const resultRoot = document.querySelector('#axs-results');
   removeChildren(resultRoot);
+  if (Object.keys(idToWarningsMap).length === 0) {
+    const p = document.createElement('p');
+    p.textContent = 'No failures found';
+    resultRoot.appendChild(p);
+    return;
+  }
+
   const ul = document.createElement('ul');
   for (i in idToWarningsMap) {
     var div = document.createElement('li');
