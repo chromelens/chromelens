@@ -19,20 +19,18 @@ var devtools = null;
 const devToolsListener = function(message, sender, sendResponse) {
   switch (message.type) {
     case messageType.EXECUTE_SCRIPT: {
-      const { tabId, scriptToInject } = message.data;
-      // Inject a content script into the identified tab
-      chrome.tabs.executeScript(tabId, { file: scriptToInject });
+      const { scriptToInject } = message.data;
+      // Inject a content script into the active tab
+      chrome.tabs.executeScript({file: scriptToInject});
       break;
     }
     case messageType.RUN_AXS: {
-      const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: `${auditDir}/axs_testing.js` });
-      chrome.tabs.executeScript(tabId, { file: `${auditDir}/run_axs.js` });
+      chrome.tabs.executeScript({ file: `${auditDir}/axs_testing.js` });
+      chrome.tabs.executeScript({ file: `${auditDir}/run_axs.js` });
       break;
     }
     case messageType.CLEAR_AXS: {
-      const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: `${auditDir}/clear_axs.js`})
+      chrome.tabs.executeScript({ file: `${auditDir}/clear_axs.js`})
       break;
     }
     case messageType.AXS_COMPLETE: {
@@ -48,8 +46,8 @@ const devToolsListener = function(message, sender, sendResponse) {
       break;
     }
     case messageType.HIGHLIGHT_WARNING: {
-        const { tabId, warningId } = message.data;
-        chrome.tabs.sendMessage(tabId, {
+        const { warningId } = message.data;
+        chrome.tabs.sendMessage({
           type: messageType.HIGHLIGHT_WARNING,
           data: {
             warningId: warningId
@@ -58,8 +56,8 @@ const devToolsListener = function(message, sender, sendResponse) {
         break;
     }
     case messageType.UNHIGHLIGHT_WARNING: {
-        const { tabId, warningId } = message.data;
-        chrome.tabs.sendMessage(tabId, {
+        const { warningId } = message.data;
+        chrome.tabs.sendMessage({
           type: messageType.UNHIGHLIGHT_WARNING,
           data: {
             warningId: warningId
@@ -92,14 +90,12 @@ const devToolsListener = function(message, sender, sendResponse) {
       break;
     }
     case messageType.TRACE_TAB_PATH: {
-      const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/trace_tab_path.js` });
+      chrome.tabs.executeScript({ file: `${tracerDir}/trace_tab_path.js` });
       break;
     }
     case messageType.PNG_TAB_PATH: {
-      const { tabId } = message.data;
-      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/html2canvas.js` });
-      chrome.tabs.executeScript(tabId, { file: `${tracerDir}/png_tab_path.js` });
+      chrome.tabs.executeScript({ file: `${tracerDir}/html2canvas.js` });
+      chrome.tabs.executeScript({ file: `${tracerDir}/png_tab_path.js` });
       break;
     }
     default: {
